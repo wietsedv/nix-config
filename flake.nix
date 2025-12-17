@@ -11,12 +11,18 @@
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       home-manager,
       nix-darwin,
+      sops-nix,
       ...
     }:
     {
@@ -25,6 +31,7 @@
           home-manager.darwinModules.home-manager
           {
             home-manager = {
+              sharedModules = [ sops-nix.homeManagerModules.sops ];
               useGlobalPkgs = true;
               useUserPackages = true;
               users.wietse = ./hosts/macbook/home.nix;
