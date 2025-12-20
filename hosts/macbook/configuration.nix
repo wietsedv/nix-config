@@ -44,13 +44,6 @@
 
   networking.hostName = "macbook";
   networking.computerName = "macbook";
-  networking.knownNetworkServices = [
-    "Wi-Fi"
-  ];
-  networking.dns = [
-    "1.1.1.1"
-    "1.0.0.1"
-  ];
 
   nix = {
     enable = true;
