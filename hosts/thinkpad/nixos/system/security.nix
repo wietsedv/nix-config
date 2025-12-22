@@ -1,0 +1,37 @@
+{ pkgs, ... }:
+
+{
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "wietse" ];
+  };
+
+  programs.seahorse.enable = true;
+
+  security.pam.services = {
+    gdm.enableGnomeKeyring = true;
+    hyprlock.enableGnomeKeyring = true;
+    sudo.fprintAuth = false;
+  };
+
+  security.polkit.enable = true;
+
+  security.rtkit.enable = true;
+
+  services.clamav = {
+    daemon.enable = true;
+    scanner.enable = true;
+    updater.enable = true;
+  };
+
+  services.fprintd = {
+    enable = true;
+    tod = {
+      enable = true;
+      driver = pkgs.libfprint-2-tod1-goodix;
+    };
+  };
+
+  services.gnome.gnome-keyring.enable = true;
+}
