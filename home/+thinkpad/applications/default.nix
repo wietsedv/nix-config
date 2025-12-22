@@ -54,17 +54,6 @@
     ];
   };
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    history = {
-      append = true;
-      size = 10000;
-    };
-    historySubstringSearch.enable = true;
-    syntaxHighlighting.enable = true;
-  };
-
   # programs.ssh = {
   #   enable = true;
   #   enableDefaultConfig = false;

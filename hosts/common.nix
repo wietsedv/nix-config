@@ -1,6 +1,14 @@
 { lib, pkgs, ... }:
 
 {
+  environment = {
+    shellAliases = {
+      ter = "ssh terra";
+      mar = "ssh mars";
+      lun = "ssh luna";
+    };
+  };
+
   nix = {
     channel.enable = false;
     gc = {
@@ -20,4 +28,18 @@
   nixpkgs.config.allowUnfree = true;
 
   time.timeZone = "Europe/Amsterdam";
+
+  programs.zsh =
+    if pkgs.stdenv.isLinux then
+      {
+        enable = true;
+        autosuggestions.enable = true;
+        syntaxHighlighting.enable = true;
+      }
+    else
+      {
+        enable = true;
+        enableAutosuggestions = true;
+        enableSyntaxHighlighting = true;
+      };
 }

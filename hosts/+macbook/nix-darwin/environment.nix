@@ -2,7 +2,6 @@
 
 {
   environment = {
-    pathsToLink = [ "/share/zsh" ];
     systemPackages = with pkgs; [
       biome
       bun
@@ -33,6 +32,4 @@
   };
 
   fonts.packages = [ pkgs.nerd-fonts.meslo-lg ];
-
-  programs.zsh.enable = true;
 }
