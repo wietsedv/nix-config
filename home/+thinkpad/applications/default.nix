@@ -39,8 +39,6 @@
     nil
   ];
 
-  programs.direnv.enable = true;
-
   programs.git = {
     enable = true;
     signing = {

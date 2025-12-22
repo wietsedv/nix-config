@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../common
     ./applications
     ./desktop
   ];
