@@ -2,8 +2,7 @@
 
 {
   imports = [
-    ./home/yazi.nix
-    ./home/zsh.nix
+    ./terminal
   ];
 
   home = {

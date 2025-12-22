@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ./home/applications
-    ./home/desktop
+    ./applications
+    ./desktop
   ];
 
   home.stateVersion = "25.05";

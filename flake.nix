@@ -50,13 +50,13 @@
           lanzaboote.nixosModules.lanzaboote
           {
             home-manager = {
+              sharedModules = [ inputs.walker.homeManagerModules.default ];
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.wietse = ./hosts/thinkpad/home.nix;
-              extraSpecialArgs = { inherit inputs; };
+              users.wietse = ./home/+thinkpad/home.nix;
             };
           }
-          ./hosts/thinkpad/configuration.nix
+          ./hosts/+thinkpad/configuration.nix
         ];
       };
 
@@ -68,10 +68,10 @@
               sharedModules = [ sops-nix.homeManagerModules.sops ];
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.wietse = ./hosts/macbook/home.nix;
+              users.wietse = ./home/+macbook/home.nix;
             };
           }
-          ./hosts/macbook/configuration.nix
+          ./hosts/+macbook/configuration.nix
         ];
       };
     };
