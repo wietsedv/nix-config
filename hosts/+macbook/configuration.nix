@@ -8,6 +8,8 @@
 
   networking.hostName = "macbook";
 
+  nixpkgs.hostPlatform = "aarch64-darwin";
+
   users.users.wietse = {
     home = "/Users/wietse";
   };

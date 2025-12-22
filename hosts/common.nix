@@ -1,11 +1,11 @@
-{ ... }:
+{ lib, pkgs, ... }:
 
 {
   nix = {
     channel.enable = false;
     gc = {
       automatic = true;
-      dates = "weekly";
+      dates = lib.mkIf pkgs.stdenv.isLinux "weekly";
       options = "--delete-older-than 30d";
     };
     settings = {
@@ -13,7 +13,7 @@
         "nix-command"
         "flakes"
       ];
-      # trusted-users = [ "@wheel" ];
+      trusted-users = [ "wietse" ];
     };
   };
 
