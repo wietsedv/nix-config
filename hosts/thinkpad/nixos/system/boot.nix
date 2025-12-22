@@ -16,10 +16,9 @@
     lanzaboote = {
       enable = true;
       configurationLimit = 24;
-
       pkiBundle = "/var/lib/sbctl";
-      # autoGenerateKeys.enable = true;
-      # autoEnrollKeys.enable = true;
+      autoGenerateKeys.enable = true;
+      autoEnrollKeys.enable = true;
     };
 
     loader = {
