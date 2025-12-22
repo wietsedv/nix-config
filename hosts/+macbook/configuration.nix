@@ -1,71 +1,24 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
-    ./nix-darwin/homebrew.nix
-    ./nix-darwin/skhd.nix
-    ./nix-darwin/yabai.nix
+    ../common.nix
+    ./nix-darwin
   ];
 
-  environment = {
-    pathsToLink = [ "/share/zsh" ];
-    systemPackages = with pkgs; [
-      biome
-      bun
-      cmake
-      ffmpeg
-      gh
-      git
-      git-lfs
-      go
-      htop
-      jq
-      nano
-      nil
-      nmap
-      nodejs_22
-      ruby
-      sox
-      tlrc
-      unar
-      watchman
-      wget
-      zulu17
-      (python3.withPackages (
-        ps: with ps; [
-          numpy
-          requests
-        ]
-      ))
-    ];
-  };
-
-  fonts.packages = [ pkgs.nerd-fonts.meslo-lg ];
-
   networking.hostName = "macbook";
-  networking.computerName = "macbook";
 
-  nix = {
-    enable = true;
-    channel.enable = false;
-    optimise.automatic = true;
-    settings = {
-      trusted-users = [
-        "root"
-        "wietse"
-      ];
-    };
+  users.users.wietse = {
+    home = "/Users/wietse";
   };
-
-  nixpkgs.config.allowUnfree = true;
-
-  nixpkgs.hostPlatform = "aarch64-darwin";
-
-  programs.zsh.enable = true;
 
   system.primaryUser = "wietse";
 
-  system.stateVersion = 6;
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.wietse = ../../home/+macbook/home.nix;
+  };
 
-  users.users.wietse.home = "/Users/wietse";
+  system.stateVersion = 6;
 }

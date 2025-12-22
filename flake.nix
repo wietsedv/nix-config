@@ -49,12 +49,9 @@
           home-manager.nixosModules.home-manager
           lanzaboote.nixosModules.lanzaboote
           {
-            home-manager = {
-              sharedModules = [ inputs.walker.homeManagerModules.default ];
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.wietse = ./home/+thinkpad/home.nix;
-            };
+            home-manager.sharedModules = [
+              inputs.walker.homeManagerModules.default
+            ];
           }
           ./hosts/+thinkpad/configuration.nix
         ];
@@ -64,12 +61,9 @@
         modules = [
           home-manager.darwinModules.home-manager
           {
-            home-manager = {
-              sharedModules = [ sops-nix.homeManagerModules.sops ];
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.wietse = ./home/+macbook/home.nix;
-            };
+            home-manager.sharedModules = [
+              sops-nix.homeManagerModules.sops
+            ];
           }
           ./hosts/+macbook/configuration.nix
         ];
