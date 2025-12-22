@@ -9,8 +9,6 @@
       cmake
       ffmpeg
       gh
-      git
-      git-lfs
       go
       htop
       jq

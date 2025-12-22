@@ -18,34 +18,4 @@
       app-notifications = false;
     };
   };
-
-  programs.yazi = {
-    enable = true;
-    shellWrapperName = "y";
-    # plugins = {
-    #   starship = pkgs.yaziPlugins.starship;
-    # };
-    # initLua = ''
-    #   require("starship"):setup()
-    # '';
-    settings = {
-      mgr = {
-        linemode = "mtime";
-      };
-      opener = {
-        zeditor = [
-          {
-            run = ''zeditor "$1"'';
-            desc = "Zed";
-          }
-        ];
-      };
-      open.rules = [
-        {
-          mime = "inode/directory";
-          use = "zeditor";
-        }
-      ];
-    };
-  };
 }
