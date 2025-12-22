@@ -5,7 +5,7 @@
     enable = true;
     skhdConfig = ''
       # Commands
-      cmd - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
+      cmd - return : /etc/profiles/per-user/wietse/bin/ghostty
       shift + cmd - o : /Applications/Firefox.app/Contents/MacOS/firefox
       alt + cmd - return : open ~
 

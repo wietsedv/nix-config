@@ -118,6 +118,8 @@
         "SUPER, L, exec, hyprlock"
         "SUPER, F, exec, firefox"
         "SUPER, code:51, exec, 1password"
+        "SUPER, return, exec, ghostty +new-window"
+        ", code:192, exec, nc -U /run/user/1000/walker/walker.sock"
       ];
     };
 

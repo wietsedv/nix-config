@@ -3,10 +3,6 @@
 # TODO https://github.com/firecat53/networkmanager-dmenu
 
 {
-  wayland.windowManager.hyprland.settings = {
-    bind = [ ", code:192, exec, nc -U /run/user/1000/walker/walker.sock" ];
-  };
-
   programs.walker = {
     enable = true;
     runAsService = true;

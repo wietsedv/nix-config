@@ -15,7 +15,6 @@
     casks = [
       "1password"
       "1password-cli"
-      "alacritty"
       {
         name = "alfred";
         greedy = true;
