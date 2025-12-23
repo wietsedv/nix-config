@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ../common
-    ./nix-darwin
+    ../../system/+macbook
+    ../../system/common
   ];
 
   networking.hostName = "macbook";

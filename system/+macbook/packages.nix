@@ -26,7 +26,6 @@
       "orbstack"
       "orcaslicer"
       "proton-mail-bridge"
-      "tailscale-app"
       "ungoogled-chromium"
       "vlc"
     ];

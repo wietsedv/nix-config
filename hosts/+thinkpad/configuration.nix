@@ -2,10 +2,9 @@
 
 {
   imports = [
-    ../common
-    ./nixos
+    ../../system/+thinkpad
+    ../../system/common
     ./hardware-configuration.nix
-    ./networking.nix
   ];
 
   networking.hostName = "thinkpad";
