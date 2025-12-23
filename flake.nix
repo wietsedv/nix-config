@@ -60,11 +60,6 @@
       darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
         modules = [
           home-manager.darwinModules.home-manager
-          {
-            home-manager.sharedModules = [
-              sops-nix.homeManagerModules.sops
-            ];
-          }
           ./hosts/+macbook/configuration.nix
         ];
       };
