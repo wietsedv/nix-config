@@ -2,6 +2,8 @@
 
 {
   nix = {
+    package = pkgs.lixPackageSets.latest.lix;
+
     channel.enable = false;
     gc = {
       automatic = true;
@@ -16,6 +18,16 @@
       trusted-users = [ "wietse" ];
     };
   };
+
+  nixpkgs.overlays = [
+    # https://search.nixos.org/packages?channel=unstable&query=lixpackagesets.latest
+    (final: prev: {
+      inherit (prev.lixPackageSets.latest)
+        nixpkgs-review
+        nix-direnv
+        ;
+    })
+  ];
 
   nixpkgs.config.allowUnfree = true;
 }

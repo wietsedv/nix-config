@@ -18,10 +18,10 @@ System and home configurations are recursively imported from `system/` and `home
 - full monorepo
 - systemd-networkd
 - nixos-containers
-- lix
 - continuwuity
 - deploy-rs / colmena
 - [server store via nix.sshServe](https://docs.lix.systems/manual/lix/stable/package-management/ssh-substituter.html)
 - forgejo
 - forgejo actions
+- nix-fast-build
 
