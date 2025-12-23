@@ -1,10 +1,14 @@
-{ ... }:
+{ lib, ... }:
 
-{
-  imports = [
-    ../../system/+macbook
-    ../../system/common
+let
+  recursiveImports = import ../recursive-imports.nix lib [
+    "+macbook"
+    "laptop"
+    "common"
   ];
+in
+{
+  imports = recursiveImports ../../system;
 
   networking.hostName = "macbook";
 
@@ -22,13 +26,12 @@
     users.wietse =
       { ... }:
       {
-        imports = [
-          ../../home/+macbook
-          ../../home/laptop
-        ];
+        imports = recursiveImports ../../home;
         home.stateVersion = "25.05";
       };
   };
+
+  time.timeZone = "Europe/Amsterdam";
 
   system.stateVersion = 6;
 }

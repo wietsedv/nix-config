@@ -1,11 +1,14 @@
-{ ... }:
+{ lib, ... }:
 
-{
-  imports = [
-    ../../system/+thinkpad
-    ../../system/common
-    ./hardware-configuration.nix
+let
+  recursiveImports = import ../recursive-imports.nix lib [
+    "+thinkpad"
+    "laptop"
+    "common"
   ];
+in
+{
+  imports = [ ./hardware-configuration.nix ] + recursiveImports ../../system;
 
   networking.hostName = "thinkpad";
 
@@ -20,13 +23,12 @@
     users.wietse =
       { ... }:
       {
-        imports = [
-          ../../home/+thinkpad
-          ../../home/laptop
-        ];
+        imports = recursiveImports ../../home;
         home.stateVersion = "25.05";
       };
   };
+
+  time.timeZone = "Europe/Amsterdam";
 
   system.stateVersion = "25.05";
 }
