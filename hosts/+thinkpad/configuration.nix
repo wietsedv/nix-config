@@ -18,7 +18,15 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.wietse = ../../home/+thinkpad/home.nix;
+    users.wietse =
+      { ... }:
+      {
+        imports = [
+          ../../home/+thinkpad
+          ../../home/laptop
+        ];
+        home.stateVersion = "25.05";
+      };
   };
 
   system.stateVersion = "25.05";

@@ -19,7 +19,15 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.wietse = ../../home/+macbook/home.nix;
+    users.wietse =
+      { ... }:
+      {
+        imports = [
+          ../../home/+macbook
+          ../../home/laptop
+        ];
+        home.stateVersion = "25.05";
+      };
   };
 
   system.stateVersion = 6;
