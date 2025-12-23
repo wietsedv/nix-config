@@ -22,7 +22,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Elephant + Walker [x86_64-linux]
+    # Walker
     systems.url = "github:nix-systems/x86_64-linux";
     elephant = {
       url = "github:abenz1267/elephant";
@@ -43,9 +43,9 @@
       home-manager,
       lanzaboote,
       nix-darwin,
-      sops-nix,
+      walker,
       ...
-    }@inputs:
+    }:
     {
       nixosConfigurations.thinkpad = nixpkgs.lib.nixosSystem {
         modules = [
@@ -53,7 +53,7 @@
           lanzaboote.nixosModules.lanzaboote
           {
             home-manager.sharedModules = [
-              inputs.walker.homeManagerModules.default
+              walker.homeManagerModules.default
             ];
           }
           ./hosts/+thinkpad/configuration.nix
