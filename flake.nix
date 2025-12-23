@@ -2,11 +2,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    elephant = {
-      url = "github:abenz1267/elephant";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,9 +22,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Elephant + Walker [x86_64-linux]
+    systems.url = "github:nix-systems/x86_64-linux";
+    elephant = {
+      url = "github:abenz1267/elephant";
+      inputs.systems.follows = "systems";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     walker = {
       url = "github:abenz1267/walker";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
       inputs.elephant.follows = "elephant";
     };
   };
