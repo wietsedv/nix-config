@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../common.nix
+    ../common
     ./nixos
     ./hardware-configuration.nix
     ./networking.nix

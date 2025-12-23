@@ -1,6 +1,12 @@
-{ ... }:
+{ lib, pkgs, ... }:
 
 {
-  # keep here for home-manager zsh integrations
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    historySubstringSearch.enable = true;
+  };
+
+  programs.starship = lib.mkIf pkgs.stdenv.isDarwin {
+    enable = true;
+  };
 }
