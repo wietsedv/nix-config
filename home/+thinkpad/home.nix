@@ -3,6 +3,7 @@
 {
   imports = [
     ../common
+    ../laptop
     ./applications
     ./desktop
   ];
