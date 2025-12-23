@@ -8,7 +8,7 @@ let
   ];
 in
 {
-  imports = [ ./hardware-configuration.nix ] + recursiveImports ../../system;
+  imports = [ ./hardware-configuration.nix ] ++ recursiveImports ../../system;
 
   networking.hostName = "thinkpad";
 
