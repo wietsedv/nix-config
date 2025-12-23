@@ -4,32 +4,27 @@
   services.yabai = {
     enable = true;
     enableScriptingAddition = true;
-    extraConfig = ''
+    config = {
       # Window placement
-      yabai -m config layout bsp
-      yabai -m config split_ratio 0.5
-      yabai -m config auto_balance off
-      yabai -m config window_topmost on
+      layout = "bsp";
+      split_ratio = 0.5;
+      auto_balance = "off";
+      window_topmost = "on";
 
       # Mouse
-      yabai -m config mouse_modifier ctrl
-      yabai -m config mouse_action1 move
-      yabai -m config mouse_action2 resize
-      yabai -m config focus_follows_mouse autofocus
+      mouse_modifier = "alt";
+      mouse_action1 = "move";
+      mouse_action2 = "resize";
+      focus_follows_mouse = "autofocus";
 
       # Window padding
-      yabai -m config top_padding    5
-      yabai -m config bottom_padding 10
-      yabai -m config left_padding   10
-      yabai -m config right_padding  10
-      yabai -m config window_gap     10
-
-      # Window mods
-      # yabai -m config window_opacity on
-      # yabai -m config active_window_opacity 1.0
-      # yabai -m config normal_window_opacity 0.9
-
-      # Special rules
+      top_padding = 5;
+      bottom_padding = 10;
+      left_padding = 10;
+      right_padding = 10;
+      window_gap = 10;
+    };
+    extraConfig = ''
       yabai -m rule --add app="^Firefox$" title=" openen$" manage=off
     '';
   };
