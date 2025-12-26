@@ -1,14 +1,17 @@
 { lib, ... }:
 
 let
-  recursiveImports = import ../recursive-imports.nix lib [
-    "+macbook"
-    "laptop"
-    "common"
-  ];
+  recursiveImports = import ../recursive-imports.nix {
+    inherit lib;
+    path = ../../config;
+    targets = [
+      "macbook"
+      "client"
+    ];
+  };
 in
 {
-  imports = recursiveImports ../../system;
+  imports = recursiveImports "";
 
   networking.hostName = "macbook";
 
@@ -26,7 +29,7 @@ in
     users.wietse =
       { ... }:
       {
-        imports = recursiveImports ../../home;
+        imports = recursiveImports "home";
         home.stateVersion = "25.05";
       };
   };

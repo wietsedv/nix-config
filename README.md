@@ -1,11 +1,11 @@
 # Nix Config
 
-These are the configurations of my NixOS and nix-darwin laptops and servers. The machine definitions in `hosts/` are bare minimum configurations. Everything important is dynamically imported from `system/` (NixOS / nix-darwin) and `home/` (Home Manager; only on laptops).
+These are the configurations of my NixOS and nix-darwin laptops and servers. The machine definitions in `hosts/` are bare minimum configurations. Everything important is automatically imported from `config/`.
 
-System and home configurations are recursively imported from `system/` and `home/`. The subdirectories that are imported are listed in each `configuration.nix`. Imported subdirectories are typically `+[hostname]`, `laptop`/`server`, and `common`.
+Directories and Nix files in `config/` can have optional suffixes to mark 
 
 ## Hosts
-- **💻 laptops**
+- **💻 clients**
     - [🍎 macbook](/hosts/+macbook/configuration.nix)
     - [🍏 thinkpad](/hosts/+thinkpad/configuration.nix)
 - **🚀 servers**

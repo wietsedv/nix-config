@@ -1,12 +1,6 @@
 { pkgs, ... }:
 
 {
-  programs._1password.enable = true;
-  programs._1password-gui = {
-    enable = true;
-    polkitPolicyOwners = [ "wietse" ];
-  };
-
   programs.seahorse.enable = true;
 
   security.pam.services = {

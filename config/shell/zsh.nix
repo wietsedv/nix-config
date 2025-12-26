@@ -14,4 +14,6 @@
         enableAutosuggestions = true;
         enableSyntaxHighlighting = true;
       };
+
+  users = if pkgs.stdenv.isLinux then { defaultUserShell = pkgs.zsh; } else { };
 }
