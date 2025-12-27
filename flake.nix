@@ -2,6 +2,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +45,7 @@
   outputs =
     {
       nixpkgs,
+      disko,
       home-manager,
       lanzaboote,
       nix-darwin,
@@ -80,6 +86,7 @@
       };
       nixosConfigurations.luna = nixpkgs.lib.nixosSystem {
         modules = [
+          disko.nixosModules.disko
           ./hosts/+luna/configuration.nix
         ];
       };
