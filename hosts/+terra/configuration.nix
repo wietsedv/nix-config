@@ -60,44 +60,4 @@ in
   boot.kernelModules = [ "nct6775" ];
 
   services.apcupsd.enable = true;
-
-  personal = {
-    misc = {
-      firewall = {
-        enable = true;
-        interface = "lan0";
-      };
-    };
-    servers = {
-      blocky.enable = true;
-      kea = {
-        enable = true;
-        prefix = "192.168.0";
-      };
-      mosquitto.enable = true;
-      samba = {
-        enable = true;
-        shares = {
-          global = {
-            "fruit:aapl" = "yes";
-            "fruit:copyfile" = "yes";
-          };
-          media = {
-            path = "/data/media";
-            writeable = true;
-          };
-          tmp = {
-            path = "/data/tmp";
-            writeable = true;
-          };
-          public = {
-            path = "/data/public";
-            writeable = true;
-            public = true;
-          };
-        };
-      };
-      traefik.enable = true;
-    };
-  };
 }
