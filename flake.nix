@@ -73,7 +73,7 @@
       nixosConfigurations.terra = nixpkgs.lib.nixosSystem {
         modules = [
           inputs.private.nixosModules.terra
-          ./hosts/+luna/configuration.nix
+          ./hosts/+terra/configuration.nix
         ];
       };
       nixosConfigurations.mars = nixpkgs.lib.nixosSystem {
