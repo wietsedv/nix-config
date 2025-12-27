@@ -5,12 +5,14 @@
     if pkgs.stdenv.isLinux then
       {
         enable = true;
+        enableCompletion = true;
         autosuggestions.enable = true;
         syntaxHighlighting.enable = true;
       }
     else
       {
         enable = true;
+        enableCompletion = true;
         enableAutosuggestions = true;
         enableSyntaxHighlighting = true;
       };

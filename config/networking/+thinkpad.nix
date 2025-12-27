@@ -17,10 +17,4 @@
   };
 
   # open port 5353 for mdns?
-
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "client";
-    openFirewall = true;
-  };
 }

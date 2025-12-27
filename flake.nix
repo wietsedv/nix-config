@@ -47,6 +47,13 @@
       ...
     }:
     {
+      # clients
+      darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
+        modules = [
+          home-manager.darwinModules.home-manager
+          ./hosts/+macbook/configuration.nix
+        ];
+      };
       nixosConfigurations.thinkpad = nixpkgs.lib.nixosSystem {
         modules = [
           home-manager.nixosModules.home-manager
@@ -60,10 +67,20 @@
         ];
       };
 
-      darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
+      # servers
+      nixosConfigurations.terra = nixpkgs.lib.nixosSystem {
         modules = [
-          home-manager.darwinModules.home-manager
-          ./hosts/+macbook/configuration.nix
+          ./hosts/+luna/configuration.nix
+        ];
+      };
+      nixosConfigurations.mars = nixpkgs.lib.nixosSystem {
+        modules = [
+          ./hosts/+mars/configuration.nix
+        ];
+      };
+      nixosConfigurations.luna = nixpkgs.lib.nixosSystem {
+        modules = [
+          ./hosts/+luna/configuration.nix
         ];
       };
     };

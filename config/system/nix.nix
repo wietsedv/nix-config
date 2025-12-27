@@ -11,6 +11,7 @@
       options = "--delete-older-than 30d";
     };
     settings = {
+      auto-optimise-store = true;
       experimental-features = [
         "nix-command"
         "flakes"
@@ -20,7 +21,6 @@
   };
 
   nixpkgs.overlays = [
-    # https://search.nixos.org/packages?channel=unstable&query=lixpackagesets.latest
     (final: prev: {
       inherit (prev.lixPackageSets.latest)
         nixpkgs-review

@@ -7,18 +7,14 @@ let
     targets = [
       "thinkpad"
       "client"
+      "nixos"
     ];
   };
 in
 {
-  imports = [ ./hardware-configuration.nix ] ++ recursiveImports "";
+  imports = recursiveImports "" ++ [ ./hardware-configuration.nix ];
 
   networking.hostName = "thinkpad";
-
-  users.users.wietse = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-  };
 
   home-manager = {
     useGlobalPkgs = true;
@@ -30,8 +26,4 @@ in
         home.stateVersion = "25.05";
       };
   };
-
-  time.timeZone = "Europe/Amsterdam";
-
-  system.stateVersion = "25.05";
 }

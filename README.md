@@ -24,4 +24,5 @@ Directories and Nix files in `config/` can have optional suffixes to mark
 - forgejo
 - forgejo actions
 - nix-fast-build
-
+- fix filesystems on thinkpad (mount options and /btr_pool)
+- check btrfs quota
