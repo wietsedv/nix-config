@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, pkgs, ... }:
 
 let
   # transfer snapshots to target host
@@ -24,10 +19,10 @@ let
 
   hostName = config.networking.hostName;
 in
-lib.mkIf (targets ? hostName || sources ? hostName) {
+{
   services.btrbk = {
     extraPackages = [ pkgs.lz4 ];
-    instances.btrbk = lib.mkIf (targets ? hostName) {
+    instances.btrbk = {
       onCalendar = "daily";
       settings = {
         snapshot_preserve_min = "latest";
@@ -53,6 +48,6 @@ lib.mkIf (targets ? hostName || sources ? hostName) {
         "target"
         "delete"
       ];
-    }) sources;
+    }) sources.${hostName};
   };
 }
