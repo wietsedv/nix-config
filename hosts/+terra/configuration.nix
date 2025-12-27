@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 let
   recursiveImports = import ../recursive-imports.nix {
@@ -48,6 +48,9 @@ in
       "compress=zstd"
     ];
   };
+
+  # TODO upgrade to 18 https://nixos.org/manual/nixos/stable/#module-services-postgres-upgrading
+  services.postgresql.package = pkgs.postgresql_14;
 
   services.btrfs.autoScrub = {
     enable = true;
