@@ -28,14 +28,6 @@ in
     "olm-3.2.16" # for conduit
   ];
 
-  services.btrfs.autoScrub = {
-    enable = true;
-    fileSystems = [
-      "/"
-      "/data"
-    ];
-  };
-
   boot.kernelModules = [ "nct6775" ];
 
   services.apcupsd.enable = true;

@@ -15,13 +15,4 @@ in
   imports = recursiveImports "";
 
   networking.hostName = "mars";
-
-  # TODO migrate all below
-
-  services.btrfs.autoScrub = {
-    enable = true;
-    fileSystems = [
-      "/"
-    ];
-  };
 }

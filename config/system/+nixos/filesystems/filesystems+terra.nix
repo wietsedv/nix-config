@@ -7,4 +7,6 @@
       "compress=zstd"
     ];
   };
+
+  services.btrfs.autoScrub.fileSystems = [ "/data" ];
 }
