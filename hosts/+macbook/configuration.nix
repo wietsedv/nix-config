@@ -15,14 +15,6 @@ in
 
   networking.hostName = "macbook";
 
-  nixpkgs.hostPlatform = "aarch64-darwin";
-
-  users.users.wietse = {
-    home = "/Users/wietse";
-  };
-
-  system.primaryUser = "wietse";
-
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -33,8 +25,4 @@ in
         home.stateVersion = "25.05";
       };
   };
-
-  time.timeZone = "Europe/Amsterdam";
-
-  system.stateVersion = 6;
 }

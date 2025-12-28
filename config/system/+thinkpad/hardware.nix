@@ -13,11 +13,4 @@
   };
 
   services.blueman.enable = true;
-
-  swapDevices = [
-    {
-      device = "/swap/swapfile";
-      size = 64 * 1024;
-    }
-  ];
 }

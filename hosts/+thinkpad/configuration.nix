@@ -12,7 +12,7 @@ let
   };
 in
 {
-  imports = recursiveImports "" ++ [ ./hardware-configuration.nix ];
+  imports = recursiveImports "";
 
   networking.hostName = "thinkpad";
 

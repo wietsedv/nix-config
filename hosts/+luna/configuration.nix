@@ -12,10 +12,7 @@ let
   };
 in
 {
-  imports = recursiveImports "" ++ [
-    ./disk-config.nix
-    ./hardware-configuration.nix
-  ];
+  imports = recursiveImports "";
 
   networking.hostName = "luna";
 }

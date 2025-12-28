@@ -50,6 +50,11 @@
     options = [ "subvol=var/log" ];
   };
 
+  fileSystems."/btr_pool" = {
+    device = "/dev/disk/by-uuid/b181d1b9-f53a-4a3a-9bd1-392b7d47d6cb";
+    fsType = "btrfs";
+  };
+
   fileSystems."/swap" = {
     device = "/dev/disk/by-uuid/b181d1b9-f53a-4a3a-9bd1-392b7d47d6cb";
     fsType = "btrfs";

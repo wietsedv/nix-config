@@ -12,34 +12,11 @@ let
   };
 in
 {
-  imports = recursiveImports "" ++ [ ./hardware-configuration.nix ];
+  imports = recursiveImports "";
 
   networking.hostName = "mars";
 
   # TODO migrate all below
-
-  fileSystems = {
-    "/btr_pool".options = [
-      "noatime"
-      "compress=zstd"
-    ];
-    "/".options = [
-      "noatime"
-      "compress=zstd"
-    ];
-    "/home".options = [
-      "noatime"
-      "compress=zstd"
-    ];
-    "/nix".options = [
-      "noatime"
-      "compress=zstd"
-    ];
-    "/var/log".options = [
-      "noatime"
-      "compress=zstd"
-    ];
-  };
 
   services.btrfs.autoScrub = {
     enable = true;

@@ -12,7 +12,7 @@ let
   };
 in
 {
-  imports = recursiveImports "" ++ [ ./hardware-configuration.nix ];
+  imports = recursiveImports "";
 
   networking.hostName = "terra";
 
@@ -20,34 +20,6 @@ in
 
   users.users.wietse.extraGroups = [ "media" ];
   users.groups.media.gid = 400;
-
-  fileSystems = {
-    "/btr_pool".options = [
-      "noatime"
-      "compress=zstd"
-    ];
-    "/".options = [
-      "noatime"
-      "compress=zstd"
-    ];
-    "/home".options = [
-      "noatime"
-      "compress=zstd"
-    ];
-    "/nix".options = [
-      "noatime"
-      "compress=zstd"
-    ];
-    "/var/log".options = [
-      "noatime"
-      "compress=zstd"
-    ];
-
-    "/data".options = [
-      "noatime"
-      "compress=zstd"
-    ];
-  };
 
   # TODO upgrade to 18 https://nixos.org/manual/nixos/stable/#module-services-postgres-upgrading
   services.postgresql.package = pkgs.postgresql_14;
