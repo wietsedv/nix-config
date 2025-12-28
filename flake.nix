@@ -54,6 +54,7 @@
         modules = [
           inputs.home-manager.darwinModules.home-manager
           ./hosts/+macbook/configuration.nix
+          { networking.hostName = "macbook"; }
         ];
       };
       nixosConfigurations.thinkpad = nixpkgs.lib.nixosSystem {
@@ -66,6 +67,7 @@
             ];
           }
           ./hosts/+thinkpad/configuration.nix
+          { networking.hostName = "thinkpad"; }
         ];
       };
 
@@ -74,17 +76,20 @@
         modules = [
           inputs.private.nixosModules.terra
           ./hosts/+terra/configuration.nix
+          { networking.hostName = "terra"; }
         ];
       };
       nixosConfigurations.mars = nixpkgs.lib.nixosSystem {
         modules = [
           ./hosts/+mars/configuration.nix
+          { networking.hostName = "mars"; }
         ];
       };
       nixosConfigurations.luna = nixpkgs.lib.nixosSystem {
         modules = [
           inputs.disko.nixosModules.disko
           ./hosts/+luna/configuration.nix
+          { networking.hostName = "luna"; }
         ];
       };
     };

@@ -14,8 +14,6 @@ in
 {
   imports = recursiveImports "";
 
-  networking.hostName = "thinkpad";
-
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

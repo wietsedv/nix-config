@@ -13,8 +13,6 @@ in
 {
   imports = recursiveImports "";
 
-  networking.hostName = "macbook";
-
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

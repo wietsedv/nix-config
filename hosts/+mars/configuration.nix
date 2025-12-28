@@ -13,6 +13,4 @@ let
 in
 {
   imports = recursiveImports "";
-
-  networking.hostName = "mars";
 }
