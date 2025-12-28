@@ -52,6 +52,10 @@ in
   # TODO upgrade to 18 https://nixos.org/manual/nixos/stable/#module-services-postgres-upgrading
   services.postgresql.package = pkgs.postgresql_14;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "olm-3.2.16" # for conduit
+  ];
+
   services.btrfs.autoScrub = {
     enable = true;
     fileSystems = [
