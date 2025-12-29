@@ -29,7 +29,6 @@ in
       entryPoints = {
         web = {
           address = ":80";
-          http.middlewares = [ "${config.networking.hostName}-redirect@file" ];
           http.redirections.entrypoint = {
             to = "websecure";
             scheme = "https";
@@ -60,11 +59,6 @@ in
     dynamicConfigOptions.http = lib.mkMerge [
       {
         middlewares = {
-          "${config.networking.hostName}-redirect".redirectRegex = {
-            permanent = true;
-            regex = "^https?://([a-z-]+).${config.networking.hostName}(.*)";
-            replacement = "https://\${1}.${domain}\${2}";
-          };
           sts-header.headers = {
             stsSeconds = 15552000;
             # stsIncludeSubdomains = true;
