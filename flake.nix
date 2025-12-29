@@ -48,49 +48,73 @@
 
   outputs =
     { nixpkgs, nix-darwin, ... }@inputs:
-    {
-      # clients
-      darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
-        modules = [
-          inputs.home-manager.darwinModules.home-manager
-          ./hosts/+macbook/configuration.nix
-          { networking.hostName = "macbook"; }
-        ];
-      };
-      nixosConfigurations.thinkpad = nixpkgs.lib.nixosSystem {
-        modules = [
-          inputs.home-manager.nixosModules.home-manager
-          inputs.lanzaboote.nixosModules.lanzaboote
-          {
-            home-manager.sharedModules = [
-              inputs.walker.homeManagerModules.default
-            ];
-          }
-          ./hosts/+thinkpad/configuration.nix
-          { networking.hostName = "thinkpad"; }
-        ];
-      };
+    let
+      recursiveImports = import ./recursive-imports.nix nixpkgs.lib ./config;
 
-      # servers
-      nixosConfigurations.terra = nixpkgs.lib.nixosSystem {
-        modules = [
-          inputs.private.nixosModules.terra
-          ./hosts/+terra/configuration.nix
-          { networking.hostName = "terra"; }
-        ];
+      recursiveModules = {
+        default = recursiveImports "";
+        home = recursiveImports "home";
       };
-      nixosConfigurations.mars = nixpkgs.lib.nixosSystem {
-        modules = [
-          ./hosts/+mars/configuration.nix
-          { networking.hostName = "mars"; }
-        ];
-      };
-      nixosConfigurations.luna = nixpkgs.lib.nixosSystem {
-        modules = [
-          inputs.disko.nixosModules.disko
-          ./hosts/+luna/configuration.nix
-          { networking.hostName = "luna"; }
-        ];
-      };
+    in
+    {
+      darwinConfigurations.macbook =
+        let
+          targets = [
+            "macbook"
+            "client"
+          ];
+        in
+        nix-darwin.lib.darwinSystem {
+          modules = recursiveModules.default targets ++ [
+            inputs.home-manager.darwinModules.home-manager
+            {
+              networking.hostName = "macbook";
+              home-manager.sharedModules = recursiveModules.home targets;
+            }
+          ];
+        };
+
+      nixosConfigurations.thinkpad =
+        let
+          targets = [
+            "thinkpad"
+            "client"
+            "nixos"
+          ];
+        in
+        nixpkgs.lib.nixosSystem {
+          modules = recursiveModules.default targets ++ [
+            inputs.home-manager.nixosModules.home-manager
+            inputs.lanzaboote.nixosModules.lanzaboote
+            {
+              networking.hostName = "thinkpad";
+              home-manager.sharedModules = recursiveModules.home targets ++ [
+                inputs.walker.homeManagerModules.default
+              ];
+            }
+          ];
+        };
+    }
+    // {
+      nixosConfigurations =
+        let
+          makeServer =
+            hostName: modules:
+            nixpkgs.lib.nixosSystem {
+              modules =
+                recursiveModules.default [
+                  hostName
+                  "server"
+                  "nixos"
+                ]
+                ++ [ { networking.hostName = hostName; } ]
+                ++ modules;
+            };
+        in
+        {
+          luna = makeServer "luna" [ inputs.disko.nixosModules.disko ];
+          mars = makeServer "mars" [ ];
+          terra = makeServer "terra" [ inputs.private.nixosModules.terra ];
+        };
     };
 }

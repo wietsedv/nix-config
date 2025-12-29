@@ -1,10 +1,4 @@
-{
-  lib ? (import <nixpkgs> { }).lib,
-  path,
-  targets,
-}:
-
-suffix:
+lib: path: suffix: targets:
 
 let
   # directory/file basename must include one of the targets if any target is specified with +
