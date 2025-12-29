@@ -24,7 +24,7 @@ in
 
       subnet4 = lib.singleton {
         id = 1;
-        subnet = "${prefix}.0/16";
+        subnet = "${prefix}.0/24";
         pools = lib.singleton { pool = "${prefix}.100 - ${prefix}.199"; };
         option-data = [
           {
@@ -34,10 +34,6 @@ in
           {
             name = "domain-name-servers";
             data = lib.concatStringsSep ", " config.networking.nameservers;
-          }
-          {
-            name = "domain-name";
-            data = config.networking.domain;
           }
         ];
       };
