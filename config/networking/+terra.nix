@@ -32,6 +32,7 @@
 
   networking.nameservers = [ "1.1.1.1" ];
 
+  # disable legacy option
   networking.useDHCP = false;
 
   networking.nat = {

@@ -26,3 +26,4 @@ Directories and Nix files in `config/` can have optional suffixes to mark
 - nix-fast-build
 - fix filesystems on thinkpad (mount options and /btr_pool)
 - check btrfs quota
+- fix dns. blocky / Knot Resolver
