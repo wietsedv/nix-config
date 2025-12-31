@@ -33,7 +33,7 @@ in
           }
           {
             name = "domain-name-servers";
-            data = lib.concatStringsSep ", " config.networking.nameservers;
+            data = "${prefix}.1";
           }
         ];
       };

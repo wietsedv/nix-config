@@ -1,6 +1,17 @@
 { config, ... }:
 
 {
+  networking.nftables.tables."blocky" = {
+    family = "inet";
+    content = ''
+      chain pre {
+        type nat hook prerouting priority dstnat;
+        iifname "lan0" tcp dport 53 redirect to :${toString config.services.blocky.settings.ports.dns}
+        iifname "lan0" udp dport 53 redirect to :${toString config.services.blocky.settings.ports.dns}
+      }
+    '';
+  };
+
   networking.firewall.interfaces."lan0" = {
     allowedTCPPorts = [ config.services.blocky.settings.ports.dns ];
     allowedUDPPorts = [ config.services.blocky.settings.ports.dns ];
