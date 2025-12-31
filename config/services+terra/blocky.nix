@@ -1,15 +1,17 @@
-{ ... }:
+{ config, ... }:
 
 {
   networking.firewall.interfaces."lan0" = {
-    allowedTCPPorts = [ 53 ];
-    allowedUDPPorts = [ 53 ];
+    allowedTCPPorts = [ config.services.blocky.settings.ports.dns ];
+    allowedUDPPorts = [ config.services.blocky.settings.ports.dns ];
   };
 
   services.blocky = {
     enable = true;
 
     settings = {
+      ports.dns = 5300;
+
       upstreams = {
         strategy = "strict";
         groups.default = [
