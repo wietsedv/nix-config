@@ -4,7 +4,7 @@
   services.tailscale = {
     enable = true;
     openFirewall = true;
-    useRoutingFeatures = "both";
+    useRoutingFeatures = "server";
     extraUpFlags = [ "--advertise-exit-node" ];
   };
 }

@@ -4,10 +4,7 @@ let
   terra = "10.10.10.2";
 in
 {
-  networking.firewall.checkReversePath = "loose";
-
   systemd.network = {
-
     networks."50-wg0" = {
       matchConfig.Name = "wg0";
       address = [ "${terra}/32" ];
@@ -33,6 +30,7 @@ in
         }
       ];
     };
-
   };
+
+  networking.firewall.checkReversePath = "loose";
 }

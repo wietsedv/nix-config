@@ -1,6 +1,20 @@
 { ... }:
 
 {
+  networking.nat = {
+    enable = true;
+    externalInterface = "wan0";
+    internalInterfaces = [ "lan0" ];
+  };
+
+  networking.useDHCP = false;
+
+  services.resolved = {
+    llmnr = "false";
+    extraConfig = "MulticastDNS=yes";
+  };
+  networking.firewall.interfaces."lan0".allowedUDPPorts = [ 5353 ];
+
   systemd.network = {
     enable = true;
 
@@ -29,24 +43,4 @@
       };
     };
   };
-
-  networking.nameservers = [ "1.1.1.1" ];
-
-  # disable legacy option
-  networking.useDHCP = false;
-
-  networking.nat = {
-    enable = true;
-    externalInterface = "wan0";
-    internalInterfaces = [ "lan0" ];
-  };
-
-  # Multicast DNS
-  services.resolved = {
-    llmnr = "false";
-    extraConfig = ''
-      MulticastDNS=yes
-    '';
-  };
-  networking.firewall.interfaces."lan0".allowedUDPPorts = [ 5353 ];
 }
