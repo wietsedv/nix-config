@@ -7,11 +7,4 @@
   boot.kernelModules = [ "nct6775" ];
 
   services.apcupsd.enable = true;
-
-  personal.web-apps = {
-    actual.enable = true;
-    nextcloud.enable = true;
-    zigbee2mqtt.enable = true;
-    fluidd.enable = true;
-  };
 }
