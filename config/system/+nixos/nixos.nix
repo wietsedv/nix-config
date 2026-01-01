@@ -7,9 +7,16 @@
     "net.ipv4.tcp_congestion_control" = "bbr";
   };
 
-  users.users.wietse = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
+  users = {
+    users.wietse = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "media"
+      ];
+    };
+
+    groups.media.gid = 400;
   };
 
   services.fwupd.enable = true;
