@@ -11,7 +11,6 @@
   personal.web-apps = {
     actual.enable = true;
     nextcloud.enable = true;
-    # forgejo.enable = true;
     zigbee2mqtt.enable = true;
     fluidd.enable = true;
   };
