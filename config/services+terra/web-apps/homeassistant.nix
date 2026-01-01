@@ -62,15 +62,6 @@
       "shelly"
     ];
   };
-  personal.web-apps.homeassistant.port = config.services.home-assistant.config.http.server_port;
 
-  services.traefik.dynamicConfigOptions.http = {
-    routers.homeassistant = {
-      rule = "Host(`homeassistant.${config.networking.hostName}.${config.globalDomain}`)";
-      service = "homeassistant";
-    };
-    services.homeassistant.loadBalancer.servers = [
-      { url = "http://127.0.0.1:${toString config.services.home-assistant.config.http.server_port}"; }
-    ];
-  };
+  custom.web-apps.homeassistant.port = config.services.home-assistant.config.http.server_port;
 }

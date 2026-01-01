@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 
 {
   networking.firewall.interfaces."lan0".allowedTCPPorts = [ 32400 ];
@@ -10,13 +10,5 @@
 
   systemd.services.plex.serviceConfig.UMask = "002";
 
-  services.traefik.dynamicConfigOptions.http = {
-    routers.plex = {
-      rule = "Host(`plex.${config.networking.hostName}.${config.globalDomain}`)";
-      service = "plex";
-    };
-    services.plex.loadBalancer.servers = [
-      { url = "http://127.0.0.1:${toString 32400}"; }
-    ];
-  };
+  custom.web-apps.plex.port = 32400;
 }

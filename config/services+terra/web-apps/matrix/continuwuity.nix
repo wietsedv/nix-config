@@ -13,13 +13,5 @@
     };
   };
 
-  services.traefik.dynamicConfigOptions.http = {
-    routers.continuwuity = {
-      rule = "Host(`continuwuity.${config.networking.hostName}.${config.globalDomain}`)";
-      service = "continuwuity";
-    };
-    services.continuwuity.loadBalancer.servers = [
-      { url = "http://127.0.0.1:${toString config.services.matrix-continuwuity.settings.global.port}"; }
-    ];
-  };
+  custom.web-apps.continuwuity.port = builtins.head config.services.matrix-continuwuity.settings.global.port;
 }

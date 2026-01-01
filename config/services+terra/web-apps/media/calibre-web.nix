@@ -20,13 +20,5 @@
 
   systemd.services.calibre-web.serviceConfig.UMask = "002";
 
-  services.traefik.dynamicConfigOptions.http = {
-    routers.calibre-web = {
-      rule = "Host(`calibre-web.${config.networking.hostName}.${config.globalDomain}`)";
-      service = "calibre-web";
-    };
-    services.calibre-web.loadBalancer.servers = [
-      { url = "http://127.0.0.1:${toString config.services.calibre-web.listen.port}"; }
-    ];
-  };
+  custom.web-apps.calibre-web.port = config.services.calibre-web.listen.port;
 }
