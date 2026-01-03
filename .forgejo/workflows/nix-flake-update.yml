@@ -1,0 +1,39 @@
+name: Nix Flake Update
+
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  nix-flake-update:
+    runs-on: nixos
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Flake Update
+        run: nix flake update --verbose
+
+      - name: Flake Info
+        run: nix flake info --verbose
+
+      - name: Nix Flake Check
+        run: nix flake check --verbose
+
+      - name: Commit and push
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git config user.name "forgejo-bot"
+          git config user.email "forgejo-bot@local"
+
+          git add flake.lock
+          git commit -m "flake update"
+          git push origin HEAD:main
