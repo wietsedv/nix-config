@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    # nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     disko = {
       url = "github:nix-community/disko";
@@ -112,20 +112,20 @@
                 ++ [ { networking.hostName = hostName; } ]
                 ++ modules
                 ++ [
-                  {
-                    nixpkgs.overlays = [
-                      (
-                        final: prev:
-                        let
-                          pkgs-master = inputs.nixpkgs-master.legacyPackages.${prev.stdenv.hostPlatform.system};
-                        in
-                        {
-                          audiobookshelf = pkgs-master.audiobookshelf; # https://nixpkgs-tracker.ocfox.me/?pr=475939
-                          actual-server = pkgs-master.actual-server; # https://nixpkgs-tracker.ocfox.me/?pr=475880
-                        }
-                      )
-                    ];
-                  }
+                  # {
+                  #   nixpkgs.overlays = [
+                  #     (
+                  #       final: prev:
+                  #       let
+                  #         pkgs-master = inputs.nixpkgs-master.legacyPackages.${prev.stdenv.hostPlatform.system};
+                  #       in
+                  #       {
+                  #         audiobookshelf = pkgs-master.audiobookshelf; # https://nixpkgs-tracker.ocfox.me/?pr=475939
+                  #         actual-server = pkgs-master.actual-server; # https://nixpkgs-tracker.ocfox.me/?pr=475880
+                  #       }
+                  #     )
+                  #   ];
+                  # }
                 ];
             };
         in
