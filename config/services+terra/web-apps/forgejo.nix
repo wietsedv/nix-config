@@ -20,7 +20,15 @@
       url = config.services.forgejo.settings.server.ROOT_URL;
       name = config.networking.hostName;
       tokenFile = "/var/lib/gitea-runner/token.env";
+
       labels = [ "nixos:host" ];
+      hostPackages = with pkgs; [
+        bash
+        coreutils
+        openssh
+        nodejs
+        config.nix.package
+      ];
     };
   };
 }

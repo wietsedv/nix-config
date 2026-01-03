@@ -15,6 +15,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: SSH Agent
+        uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Flake Update
         run: nix flake update --verbose
 

@@ -18,4 +18,9 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEMZ1taXgwWZU1+rAiLOHzVXyWkWLkzUZgMHxy9tMDdI wietse@terra"
     ];
   };
+
+  programs.ssh.knownHosts = {
+    "github.com".publicKey =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+  };
 }
