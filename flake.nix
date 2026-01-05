@@ -2,8 +2,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -57,6 +55,19 @@
         default = recursiveImports "";
         home = recursiveImports "home";
       };
+
+      makeServer =
+        hostName: modules:
+        nixpkgs.lib.nixosSystem {
+          modules =
+            recursiveModules.default [
+              hostName
+              "server"
+              "nixos"
+            ]
+            ++ [ { networking.hostName = hostName; } ]
+            ++ modules;
+        };
     in
     {
       darwinConfigurations.macbook =
@@ -76,63 +87,31 @@
           ];
         };
 
-      nixosConfigurations.thinkpad =
-        let
-          targets = [
-            "thinkpad"
-            "client"
-            "nixos"
-          ];
-        in
-        nixpkgs.lib.nixosSystem {
-          modules = recursiveModules.default targets ++ [
-            inputs.home-manager.nixosModules.home-manager
-            inputs.lanzaboote.nixosModules.lanzaboote
-            {
-              networking.hostName = "thinkpad";
-              home-manager.sharedModules = recursiveModules.home targets ++ [
-                inputs.walker.homeManagerModules.default
-              ];
-            }
-          ];
-        };
-    }
-    // {
-      nixosConfigurations =
-        let
-          makeServer =
-            hostName: modules:
-            nixpkgs.lib.nixosSystem {
-              modules =
-                recursiveModules.default [
-                  hostName
-                  "server"
-                  "nixos"
-                ]
-                ++ [ { networking.hostName = hostName; } ]
-                ++ modules
-                ++ [
-                  # {
-                  #   nixpkgs.overlays = [
-                  #     (
-                  #       final: prev:
-                  #       let
-                  #         pkgs-master = inputs.nixpkgs-master.legacyPackages.${prev.stdenv.hostPlatform.system};
-                  #       in
-                  #       {
-                  #         audiobookshelf = pkgs-master.audiobookshelf; # https://nixpkgs-tracker.ocfox.me/?pr=475939
-                  #         actual-server = pkgs-master.actual-server; # https://nixpkgs-tracker.ocfox.me/?pr=475880
-                  #       }
-                  #     )
-                  #   ];
-                  # }
+      nixosConfigurations = {
+        thinkpad =
+          let
+            targets = [
+              "thinkpad"
+              "client"
+              "nixos"
+            ];
+          in
+          nixpkgs.lib.nixosSystem {
+            modules = recursiveModules.default targets ++ [
+              inputs.home-manager.nixosModules.home-manager
+              inputs.lanzaboote.nixosModules.lanzaboote
+              {
+                networking.hostName = "thinkpad";
+                home-manager.sharedModules = recursiveModules.home targets ++ [
+                  inputs.walker.homeManagerModules.default
                 ];
-            };
-        in
-        {
-          luna = makeServer "luna" [ inputs.disko.nixosModules.disko ];
-          mars = makeServer "mars" [ ];
-          terra = makeServer "terra" [ inputs.private.nixosModules.terra ];
-        };
+              }
+            ];
+          };
+
+        luna = makeServer "luna" [ inputs.disko.nixosModules.disko ];
+        mars = makeServer "mars" [ ];
+        terra = makeServer "terra" [ inputs.private.nixosModules.terra ];
+      };
     };
 }
