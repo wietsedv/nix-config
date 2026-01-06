@@ -1,8 +1,5 @@
 { config, lib, ... }:
 
-let
-  prefix = "192.168.0";
-in
 {
   networking.firewall.interfaces."lan0".allowedUDPPorts = [ 67 ];
 
@@ -24,16 +21,16 @@ in
 
       subnet4 = lib.singleton {
         id = 1;
-        subnet = "${prefix}.0/24";
-        pools = lib.singleton { pool = "${prefix}.100 - ${prefix}.199"; };
+        subnet = "192.168.0.0/24";
+        pools = lib.singleton { pool = "192.168.0.100 - 192.168.0.199"; };
         option-data = [
           {
             name = "routers";
-            data = "${prefix}.1";
+            data = "192.168.0.1";
           }
           {
             name = "domain-name-servers";
-            data = "${prefix}.1";
+            data = "192.168.0.1";
           }
         ];
       };

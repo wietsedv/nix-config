@@ -23,6 +23,10 @@
     settings = {
       ports.dns = 5300;
 
+      customDNS.mapping = {
+        "${config.networking.hostName}.${config.globalDomain}" = "192.168.0.1";
+      };
+
       upstreams = {
         strategy = "strict";
         groups.default = [

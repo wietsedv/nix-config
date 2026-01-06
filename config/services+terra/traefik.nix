@@ -25,6 +25,10 @@ in
       80
       443
     ];
+    networking.firewall.interfaces."tailscale0".allowedTCPPorts = [
+      80
+      443
+    ];
 
     users.users.traefik.extraGroups = lib.mkIf config.virtualisation.podman.enable [ "podman" ];
 
