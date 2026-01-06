@@ -65,7 +65,10 @@
               "server"
               "nixos"
             ]
-            ++ [ { networking.hostName = hostName; } ]
+            ++ [
+              { networking.hostName = hostName; }
+              inputs.private.nixosModules.default
+            ]
             ++ modules;
         };
     in
