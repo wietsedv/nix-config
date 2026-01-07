@@ -6,6 +6,7 @@
     jq
     nano
     nmap
+    nodejs_24
     (python3.withPackages (
       ps: with ps; [
         numpy
