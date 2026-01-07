@@ -35,7 +35,7 @@
 
     # Walker
     elephant = {
-      url = "github:abenz1267/elephant";
+      url = "github:abenz1267/elephant/dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     walker = {
