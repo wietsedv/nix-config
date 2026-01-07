@@ -27,12 +27,4 @@
       fi
     '')
   ];
-
-  services.hyprpaper = {
-    enable = true;
-    settings.wallpaper = {
-      monitor = "";
-      path = "/etc/nixos/wallpaper.png";
-    };
-  };
 }

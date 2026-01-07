@@ -23,12 +23,6 @@
   #   };
   # }];
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    xwayland.enable = false;
-  };
-
   services.dbus.implementation = "broker";
 
   services.displayManager.gdm.enable = true;

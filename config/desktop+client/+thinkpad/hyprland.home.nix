@@ -3,6 +3,17 @@
 {
   services.polkit-gnome.enable = true;
 
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      wallpaper = {
+        monitor = "";
+        path = "/etc/nixos/wallpaper.png";
+      };
+      splash = false;
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
