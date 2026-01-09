@@ -10,18 +10,57 @@
     # https://github.com/abenz1267/walker/blob/master/resources/config.toml
     config = {
       placeholders = {
-        "default" = {
+        default = {
           input = "Zoeken";
           list = "Geen resultaten";
         };
       };
       providers = {
-        empty = [ "desktopapplications" ];
-        "default" = [
+        empty = [
+          "menus"
+          "desktopapplications"
+        ];
+        default = [
+          "menus"
           "desktopapplications"
           "calc"
         ];
       };
     };
+  };
+
+  programs.elephant = {
+    provider.menus.lua.vscode-workspaces = ''
+      Name = "vscode-workspaces"
+      NamePretty = "Visual Studio Code Workspaces"
+      Description = "Visual Studio Code Workspaces"
+      Icon = "applications-other"
+      Action = "code %VALUE%"
+      SearchName = true
+      Cache = true
+
+      function GetEntries()
+          local entries = {}
+
+          local handle = io.popen("find '/home/wietse/Projecten' -maxdepth 2 -type f -name '*.code-workspace' 2>/dev/null")
+          if handle then
+              for line in handle:lines() do
+                  local filename = line:match("([^/]+)$")
+                  if filename then
+                      table.insert(entries, {
+                          Text = filename,
+                          Subtext = "Visual Studio Code Workspace",
+                          Value = line,
+                          -- Preview = line,
+                          -- PreviewType = "file"
+                      })
+                  end
+              end
+              handle:close()
+          end
+
+          return entries
+      end
+    '';
   };
 }
