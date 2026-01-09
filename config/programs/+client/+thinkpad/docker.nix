@@ -1,19 +1,12 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
-  # virtualisation.podman = {
-  #   enable = true;
-  #   dockerCompat = true;
-  # };
-  # environment.systemPackages = with pkgs; [ podman-compose ];
+  environment.systemPackages = with pkgs; [ docker-compose ];
 
-  # virtualisation.docker = {
-  #   enable = true;
-  #   storageDriver = "btrfs";
-  #   # rootless = {
-  #   #   enable = true;
-  #   #   setSocketVariable = true;
-  #   # };
-  # };
-  # users.extraGroups.docker.members = [ "wietse" ];
+  virtualisation.docker = {
+    enable = true;
+    storageDriver = "btrfs";
+  };
+
+  users.extraGroups.docker.members = [ "wietse" ];
 }
