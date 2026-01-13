@@ -6,6 +6,7 @@
       name = "alfred";
       greedy = true;
     }
+    "firefox"
     "freecad"
     "gimp"
     "inkscape"
@@ -16,6 +17,7 @@
     "orbstack"
     "orcaslicer"
     "proton-mail-bridge"
+    "thunderbird"
     "ungoogled-chromium"
     "vlc"
   ];
