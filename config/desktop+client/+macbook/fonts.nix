@@ -1,5 +1,5 @@
 { pkgs, ... }:
 
 {
-  fonts.packages = [ pkgs.nerd-fonts.adwaita-mono ];
+  fonts.packages = [ pkgs.nerd-fonts.meslo-lg ];
 }

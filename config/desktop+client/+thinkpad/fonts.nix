@@ -6,7 +6,7 @@
 
     packages = with pkgs; [
       inter
-      nerd-fonts.adwaita-mono
+      nerd-fonts.meslo-lg
       noto-fonts-color-emoji
     ];
 
@@ -22,7 +22,7 @@
       defaultFonts = {
         serif = [ "Inter" ];
         sansSerif = [ "Inter" ];
-        monospace = [ "AdwaitaMono Nerd Font" ];
+        monospace = [ "MesloLGS Nerd Font Mono" ];
         emoji = [ "Noto Color Emoji" ];
       };
     };
