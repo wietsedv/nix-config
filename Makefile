@@ -31,10 +31,10 @@ mars-sync:
 	rsync --delete --filter=":- .gitignore" -avh ./ mars:/etc/nixos
 
 mars: mars-sync
-	ssh -t mars sudo nixos-rebuild switch  --sudo
+	ssh -t mars nixos-rebuild switch  --sudo
 
 mars-test: mars-sync
-	ssh -t mars sudo nixos-rebuild test --sudo
+	ssh -t mars nixos-rebuild test --sudo
 
 # luna
 luna-sync:
