@@ -8,9 +8,14 @@
       key = "~/.ssh/id_ed25519.pub";
       signByDefault = true;
     };
-    settings.user = {
-      name = "Wietse de Vries";
-      email = "wietsedv@proton.me";
+    settings = {
+      user = {
+        name = "Wietse de Vries";
+        email = "wietsedv@proton.me";
+      };
+      push = {
+        autoSetupRemote = true;
+      };
     };
     ignores = [
       ".devenv*"
