@@ -20,13 +20,5 @@
     };
   };
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      inherit (prev.lixPackageSets.latest)
-        nixpkgs-review
-        ;
-    })
-  ];
-
   nixpkgs.config.allowUnfree = true;
 }
