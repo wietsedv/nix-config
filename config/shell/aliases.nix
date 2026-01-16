@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  environment = {
+  programs.zsh = {
     shellAliases = {
       ter = "ssh terra";
       mar = "ssh mars";
