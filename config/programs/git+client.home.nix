@@ -16,6 +16,7 @@
       push = {
         autoSetupRemote = true;
       };
+      init.defaultBranch = "main";
     };
     ignores = [
       ".devenv*"

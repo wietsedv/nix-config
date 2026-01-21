@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     htop
     jq
+    bun
     nano
     nmap
     nodejs_24
