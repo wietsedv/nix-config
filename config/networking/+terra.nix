@@ -9,9 +9,9 @@
 
   networking.useDHCP = false;
 
-  services.resolved = {
-    llmnr = "false";
-    extraConfig = "MulticastDNS=yes";
+  services.resolved.settings.Resolve = {
+    LLMNR = "false";
+    MulticastDNS = "yes";
   };
   networking.firewall.interfaces."lan0".allowedUDPPorts = [ 5353 ];
 

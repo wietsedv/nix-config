@@ -8,7 +8,7 @@
       lun = "ssh luna";
 
       nf = "nix flake update";
-      nfs = "nf && nrs";
+      nfs = "nf && nr";
       nft = "nf && nrt";
     };
     interactiveShellInit = ''
