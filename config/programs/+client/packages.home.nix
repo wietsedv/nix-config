@@ -5,5 +5,6 @@
     devenv
     openssh
     nil
+    nixfmt
   ];
 }
