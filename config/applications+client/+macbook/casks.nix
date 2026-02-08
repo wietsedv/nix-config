@@ -17,6 +17,7 @@
     "orbstack"
     "orcaslicer"
     "proton-mail-bridge"
+    "spotify"
     "thunderbird"
     "ungoogled-chromium"
     "vlc"

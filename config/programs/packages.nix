@@ -17,6 +17,7 @@
       ]
     ))
     tldr
+    tmux
     unar
     wget
   ];
