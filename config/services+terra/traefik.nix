@@ -34,6 +34,7 @@ in
 
     services.traefik = {
       enable = true;
+      useEnvSubst = false;
       environmentFiles = [ "/var/lib/traefik/traefik.env" ];
 
       static.settings = {
@@ -70,47 +71,49 @@ in
       dynamic = {
         dir = "/var/lib/traefik/dynamic";
 
-        files.web-apps.settings.http = lib.mkMerge [
-          {
-            middlewares = {
-              sts-header.headers = {
-                stsSeconds = 15552000;
+        files.web-apps.settings = {
+          http = lib.mkMerge [
+            {
+              middlewares = {
+                sts-header.headers = {
+                  stsSeconds = 15552000;
+                };
               };
-            };
-            routers = {
-              traefik = {
-                rule = "Host(`traefik.${domain}`)";
-                service = "api@internal";
+              routers = {
+                traefik = {
+                  rule = "Host(`traefik.${domain}`)";
+                  service = "api@internal";
+                };
               };
-            };
-          }
-          {
-            routers = (
-              lib.mapAttrs (n: v: {
-                rule = "Host(`${n}.${domain}`)";
-                service = "${n}";
-              }) enabledWebApps
-            );
-            services = (
-              lib.mapAttrs (n: v: {
-                loadBalancer.servers = lib.singleton { url = "http://${v.host}:${toString v.port}"; };
-              }) enabledWebApps
-            );
-          }
-          {
-            routers = (
-              lib.mapAttrs (name: app: {
-                rule = "Host(`${name}.${domain}`)";
-                service = "${name}";
-              }) config.custom.web-apps
-            );
-            services = (
-              lib.mapAttrs (name: app: {
-                loadBalancer.servers = lib.singleton { url = "http://127.0.0.1:${toString app.port}"; };
-              }) config.custom.web-apps
-            );
-          }
-        ];
+            }
+            {
+              routers = (
+                lib.mapAttrs (n: v: {
+                  rule = "Host(`${n}.${domain}`)";
+                  service = "${n}";
+                }) enabledWebApps
+              );
+              services = (
+                lib.mapAttrs (n: v: {
+                  loadBalancer.servers = lib.singleton { url = "http://${v.host}:${toString v.port}"; };
+                }) enabledWebApps
+              );
+            }
+            {
+              routers = (
+                lib.mapAttrs (name: app: {
+                  rule = "Host(`${name}.${domain}`)";
+                  service = "${name}";
+                }) config.custom.web-apps
+              );
+              services = (
+                lib.mapAttrs (name: app: {
+                  loadBalancer.servers = lib.singleton { url = "http://127.0.0.1:${toString app.port}"; };
+                }) config.custom.web-apps
+              );
+            }
+          ];
+        };
       };
     };
   };
