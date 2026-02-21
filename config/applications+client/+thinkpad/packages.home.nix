@@ -9,6 +9,7 @@
     libreoffice
     nwg-displays
     nautilus
+    opencode-desktop
     slack
     ungoogled-chromium
     vlc
