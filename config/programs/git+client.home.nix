@@ -17,6 +17,11 @@
         autoSetupRemote = true;
       };
       init.defaultBranch = "main";
+      remote.origin.fetch = "+refs/heads/*:refs/remotes/origin/*";
+      alias = {
+        wt = "worktree";
+        feat = "!f() { git worktree add feature-$1 -b feature/$1 origin/develop; }; f";
+      };
     };
     ignores = [
       ".devenv*"

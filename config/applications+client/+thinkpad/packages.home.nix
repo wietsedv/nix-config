@@ -5,6 +5,7 @@
     brightnessctl
     gnome-font-viewer
     gnome-system-monitor
+    google-chrome
     libreoffice
     nwg-displays
     nautilus
