@@ -6,6 +6,7 @@
       name = "alfred";
       greedy = true;
     }
+    "element"
     "firefox"
     "freecad"
     "gimp"
