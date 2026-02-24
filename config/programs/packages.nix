@@ -9,13 +9,6 @@
     nano
     nmap
     nodejs_24
-    (python3.withPackages (
-      ps: with ps; [
-        numpy
-        pandas
-        openpyxl
-      ]
-    ))
     tldr
     tmux
     unar
