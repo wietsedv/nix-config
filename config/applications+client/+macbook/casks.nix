@@ -21,6 +21,7 @@
     "spotify"
     "thunderbird"
     "ungoogled-chromium"
+    "visual-studio-code"
     "vlc"
   ];
 }
