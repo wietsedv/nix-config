@@ -2,8 +2,6 @@
 
 {
   nix = {
-    package = pkgs.lixPackageSets.latest.lix;
-
     channel.enable = false;
     gc = {
       automatic = true;
