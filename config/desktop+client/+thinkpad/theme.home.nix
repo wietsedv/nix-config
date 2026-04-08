@@ -6,6 +6,7 @@
     gtk3.extraConfig = {
       gtk-theme-name = "adw-gtk3";
     };
+    gtk4.theme = null;
   };
 
   home.pointerCursor = {

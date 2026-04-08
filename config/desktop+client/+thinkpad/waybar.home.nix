@@ -7,7 +7,7 @@
     enable = true;
     systemd = {
       enable = true;
-      target = "hyprland-session.target";
+      targets = [ "hyprland-session.target" ];
     };
 
     # TODO gtk-font-name?
