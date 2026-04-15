@@ -13,6 +13,4 @@ in
     python
     pkgs.uv
   ];
-
-  programs.nix-ld.enable = true;
 }
