@@ -1,8 +1,6 @@
 { pkgs, ... }:
 
 {
-  programs.seahorse.enable = true;
-
   security.pam.services = {
     gdm.enableGnomeKeyring = true;
     hyprlock.enableGnomeKeyring = true;

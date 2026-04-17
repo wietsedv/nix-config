@@ -1,7 +1,5 @@
 { ... }:
 
-# TODO https://github.com/firecat53/networkmanager-dmenu
-
 {
   programs.walker = {
     enable = true;

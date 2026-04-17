@@ -21,11 +21,13 @@
   home.packages = [
     pkgs.adw-gtk3
     (pkgs.writeShellScriptBin "theme-toggle" ''
-      if [ $(dconf read /org/gnome/desktop/interface/color-scheme) = "'prefer-dark'" ]; then
-        dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
+      COLOR_SCHEME_KEY=/org/gnome/desktop/interface/color-scheme
+      if [ $(dconf read $COLOR_SCHEME_KEY) = "'prefer-dark'" ]; then
+        COLOR_SCHEME="'prefer-light'"
       else
-        dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
+        COLOR_SCHEME="'prefer-dark'"
       fi
+      dconf write $COLOR_SCHEME_KEY "$COLOR_SCHEME"
     '')
   ];
 }
