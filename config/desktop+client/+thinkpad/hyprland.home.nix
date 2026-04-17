@@ -1,6 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  home.packages = with pkgs; [ shared-mime-info ];
+
   services.polkit-gnome.enable = true;
 
   services.hyprpaper = {

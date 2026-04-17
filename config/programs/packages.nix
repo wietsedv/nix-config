@@ -5,7 +5,6 @@
     bun
     htop
     jq
-    bun
     nano
     nmap
     nodejs_24
@@ -13,6 +12,5 @@
     tmux
     unar
     wget
-    icu
   ];
 }

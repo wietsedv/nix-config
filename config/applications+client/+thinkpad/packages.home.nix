@@ -2,10 +2,11 @@
 
 {
   home.packages = with pkgs; [
+    azure-cli
     brightnessctl
     google-chrome
-    nwg-displays
     nautilus
+    nwg-displays
     onlyoffice-desktopeditors
     slack
     vlc

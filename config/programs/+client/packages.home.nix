@@ -2,10 +2,13 @@
 
 {
   home.packages = with pkgs; [
-    claude-code
-    devenv
     openssh
     nil
     nixfmt
   ];
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 }
