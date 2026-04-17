@@ -15,8 +15,11 @@
 
   services.clamav = {
     daemon.enable = true;
-    scanner.enable = true;
     updater.enable = true;
+    scanner = {
+      enable = true;
+      scanDirectories = [ "/home/wietse/Downloads" ];
+    };
   };
 
   services.fprintd = {
