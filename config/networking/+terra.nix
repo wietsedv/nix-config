@@ -43,32 +43,4 @@
       };
     };
   };
-
-  systemd.services.wan-watchdog = {
-    description = "WAN watchdog — bounce wan0 on connectivity loss";
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = pkgs.writeShellScript "wan-watchdog" ''
-        INTERFACE="wan0"
-        CHECK_HOST="172.16.15.1"
-        INTERVAL=10
-        BOUNCE_WAIT=3
-
-        while true; do
-          if ! ping -c 2 -W 3 -I "$INTERFACE" "$CHECK_HOST" &>/dev/null; then
-            echo "$(date) — network down, bouncing $INTERFACE"
-            networkctl down "$INTERFACE"
-            sleep "$BOUNCE_WAIT"
-            networkctl up "$INTERFACE"
-            sleep "$INTERVAL"
-          fi
-          sleep "$INTERVAL"
-        done
-      '';
-      Restart = "always";
-      RestartSec = 10;
-    };
-  };
 }
