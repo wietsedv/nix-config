@@ -6,6 +6,33 @@
 }:
 
 let
+  mautrix-telegram = pkgs.buildGoModule rec {
+    pname = "mautrix-telegram";
+    version = "26.04";
+    tag = "v0.2604.0";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "mautrix";
+      repo = "telegram";
+      inherit tag;
+      hash = "sha256-i/eIvsqLAst9nuhZL4a+SlMcqtwy8c0iWHwe+5dYVlI=";
+    };
+
+    vendorHash = "sha256-mQ6zvEK6YcR71zLGD1n9xZzXqiXtKIs43rxeP278Ln0=";
+
+    ldflags = [
+      "-X"
+      "main.Tag=${tag}"
+    ];
+
+    buildInputs = [
+      pkgs.olm
+      pkgs.stdenv.cc.cc.lib
+    ];
+
+    doCheck = false;
+  };
+
   defaultSettings = {
     bridge = {
       permissions = {
@@ -15,7 +42,8 @@ let
     };
     backfill.enabled = true;
     double_puppet.secrets = {
-      "${config.globalDomain}" = "as_token:OophieTh4Eid8Ti9me7eituigeireete8poo1liu7fe1Aiph7Oopeikoovooghae";
+      "${config.globalDomain}" =
+        "as_token:OophieTh4Eid8Ti9me7eituigeireete8poo1liu7fe1Aiph7Oopeikoovooghae";
     };
   };
 
@@ -28,7 +56,13 @@ let
         extev_polls = true;
       };
     }
-    # TODO telegram
+    {
+      name = "telegram";
+      package = mautrix-telegram;
+      settings.network = {
+        displayname_template = "{{ if .Deleted }}Deleted account {{or .Username .UserID }}{{ else }}{{if .FullName}}{{.FullName}}{{else}}~ {{or .Username .UserID }}{{end}}{{ end }} (TG)";
+      };
+    }
     {
       name = "whatsapp";
       package = pkgs.mautrix-whatsapp;
@@ -65,6 +99,7 @@ in
         dataDir = "/var/lib/mautrix-${bridge.name}";
         registrationFile = "${dataDir}/${bridge.name}-registration.yaml";
         configFile = "${dataDir}/${bridge.name}-config.yaml";
+        configSecretsFile = "${dataDir}/${bridge.name}-config-secrets.yaml";
 
         staticConfigFile = (pkgs.formats.yaml { }).generate "${bridge.name}-config.yaml" settings;
       in
@@ -101,6 +136,13 @@ in
             ${pkgs.yq}/bin/yq -s '.[0].appservice.as_token = .[1].as_token
               | .[0].appservice.hs_token = .[1].hs_token
               | .[0]' '${staticConfigFile}' '${registrationFile}' > '${configFile}'
+
+            # overwrite config with secrets if they exist
+            if [ -f "${configSecretsFile}" ]; then
+              ${pkgs.yq-go}/bin/yq eval-all 'select(fileIndex == 0) *+ select(fileIndex == 1)' '${configFile}' '${configSecretsFile}' > '${configFile}.tmp'
+              rm -f '${configFile}'
+              mv '${configFile}.tmp' '${configFile}'
+            fi
           '';
 
           serviceConfig = {
