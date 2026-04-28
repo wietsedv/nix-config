@@ -43,4 +43,16 @@
       };
     };
   };
+
+  systemd.services."ethtool-wan0" = {
+    description = "Disable problematic offloads on wan0";
+    after = [ "sys-subsystem-net-devices-wan0.device" ];
+    wantedBy = [ "multi-user.target" ];
+    bindsTo = [ "sys-subsystem-net-devices-wan0.device" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.ethtool}/bin/ethtool -K wan0 tso off gso off";
+    };
+  };
 }
