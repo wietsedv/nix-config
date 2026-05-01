@@ -82,6 +82,7 @@
         in
         nix-darwin.lib.darwinSystem {
           modules = recursiveModules.default targets ++ [
+            inputs.private.nixosModules.default
             inputs.home-manager.darwinModules.home-manager
             {
               networking.hostName = "macbook";
@@ -101,6 +102,7 @@
           in
           nixpkgs.lib.nixosSystem {
             modules = recursiveModules.default targets ++ [
+              inputs.private.nixosModules.default
               inputs.home-manager.nixosModules.home-manager
               inputs.lanzaboote.nixosModules.lanzaboote
               {
