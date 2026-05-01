@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    openssh
     nil
     nixd
     nixfmt
