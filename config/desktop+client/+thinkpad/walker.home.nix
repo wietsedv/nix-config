@@ -1,8 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.walker = {
     enable = true;
+    package = pkgs.walker;
     runAsService = true;
 
     # https://github.com/abenz1267/walker/blob/master/resources/config.toml
@@ -28,6 +29,7 @@
   };
 
   programs.elephant = {
+    package = pkgs.elephant;
     provider.menus.lua.vscode-workspaces = ''
       Name = "vscode-workspaces"
       NamePretty = "Visual Studio Code Workspaces"
