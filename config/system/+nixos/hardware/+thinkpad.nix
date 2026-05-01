@@ -24,7 +24,7 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/b181d1b9-f53a-4a3a-9bd1-392b7d47d6cb";
+    device = "/dev/mapper/cryptroot";
     fsType = "btrfs";
     options = [ "subvol=root" ];
   };
@@ -33,30 +33,30 @@
     "/dev/disk/by-uuid/2f4e28a5-36d1-43a0-9005-101e93fddd7c";
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/b181d1b9-f53a-4a3a-9bd1-392b7d47d6cb";
+    device = "/dev/mapper/cryptroot";
     fsType = "btrfs";
     options = [ "subvol=home" ];
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/b181d1b9-f53a-4a3a-9bd1-392b7d47d6cb";
+    device = "/dev/mapper/cryptroot";
     fsType = "btrfs";
     options = [ "subvol=nix" ];
   };
 
   fileSystems."/var/log" = {
-    device = "/dev/disk/by-uuid/b181d1b9-f53a-4a3a-9bd1-392b7d47d6cb";
+    device = "/dev/mapper/cryptroot";
     fsType = "btrfs";
     options = [ "subvol=var/log" ];
   };
 
   fileSystems."/btr_pool" = {
-    device = "/dev/disk/by-uuid/b181d1b9-f53a-4a3a-9bd1-392b7d47d6cb";
+    device = "/dev/mapper/cryptroot";
     fsType = "btrfs";
   };
 
   fileSystems."/swap" = {
-    device = "/dev/disk/by-uuid/b181d1b9-f53a-4a3a-9bd1-392b7d47d6cb";
+    device = "/dev/mapper/cryptroot";
     fsType = "btrfs";
     options = [ "subvol=swap" ];
   };
@@ -73,6 +73,6 @@
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  # hardware.cpu.intel.npu.enable = true; TODO https://github.com/NixOS/nixpkgs/issues/470638
+  hardware.cpu.intel.npu.enable = true;
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

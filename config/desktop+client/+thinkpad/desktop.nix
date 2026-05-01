@@ -10,8 +10,6 @@
 
   programs.dconf.enable = true;
 
-  services.dbus.implementation = "broker";
-
   services.displayManager.gdm.enable = true;
 
   services.keyd = {
