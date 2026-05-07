@@ -30,7 +30,6 @@
     private = {
       url = "git+ssh://git@github.com/wietsedv/nix-config-private.git?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.disko.follows = "disko";
     };
 
     # Walker
@@ -105,6 +104,7 @@
               inputs.private.nixosModules.default
               inputs.home-manager.nixosModules.home-manager
               inputs.lanzaboote.nixosModules.lanzaboote
+              inputs.sops-nix.nixosModules.default
               {
                 networking.hostName = "thinkpad";
                 home-manager.sharedModules = recursiveModules.home targets ++ [

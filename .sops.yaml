@@ -1,5 +1,6 @@
 keys:
   - &macbook age1arm7l5d9ff4sezguynnrpdg5vsnflxghpupy5s90vpe46mfugv7q00v3c3
+  - &thinkpad age1xt8qfuwne852mj0n6v69edp5p5u55c85wel49yfs8syypv0pl99se7venq
 
 creation_rules:
   - path_regex: secrets/secrets.yaml$
