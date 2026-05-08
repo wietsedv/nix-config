@@ -15,9 +15,8 @@
       advanced = {
         channel = 25;
         last_seen = "ISO_8601";
-        legacy_api = false; # TODO remove
-        legacy_availability_payload = false; # TODO remove
         log_level = "warning";
+        network_key = "!secret.yaml network_key";
       };
       availability = true;
 
