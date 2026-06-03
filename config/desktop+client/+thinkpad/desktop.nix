@@ -10,8 +10,6 @@
 
   programs.dconf.enable = true;
 
-  services.displayManager.gdm.enable = true;
-
   services.keyd = {
     enable = true;
     keyboards.default.settings.main = {

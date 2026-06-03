@@ -8,17 +8,17 @@
 let
   mautrix-telegram = pkgs.buildGoModule rec {
     pname = "mautrix-telegram";
-    version = "26.04";
-    tag = "v0.2604.0";
+    version = "26.05";
+    tag = "v0.2605.0";
 
     src = pkgs.fetchFromGitHub {
       owner = "mautrix";
       repo = "telegram";
       inherit tag;
-      hash = "sha256-i/eIvsqLAst9nuhZL4a+SlMcqtwy8c0iWHwe+5dYVlI=";
+      hash = "sha256-9TCXyGvFCZAv8xIUW3oiVRv5EBdObrLuALfME/oAWBE=";
     };
 
-    vendorHash = "sha256-mQ6zvEK6YcR71zLGD1n9xZzXqiXtKIs43rxeP278Ln0=";
+    vendorHash = "sha256-xcBbBIsFXQ90WyQ8OY+CCVIiBepIlOD/o+ZjabNvM0Q=";
 
     ldflags = [
       "-X"

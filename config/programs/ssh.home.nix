@@ -5,7 +5,7 @@
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks = {
+    settings = {
       "luna" = {
         hostname = "luna.${osConfig.globalDomain}";
       };

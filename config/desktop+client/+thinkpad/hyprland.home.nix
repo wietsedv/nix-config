@@ -21,6 +21,8 @@
     package = null;
     portalPackage = null;
 
+    systemd.enable = false; # would conflict with uwsm
+
     settings = {
       source = [
         "~/.config/hypr/monitors.conf"
@@ -124,8 +126,8 @@
         "SUPER, Q, killactive"
         "SUPER, T, exec, theme-toggle"
         "SUPER, L, exec, hyprlock"
-        "SUPER, F, exec, firefox"
-        "SUPER, code:51, exec, 1password"
+        "SUPER, F, exec, uwsm-app firefox"
+        "SUPER, code:51, exec, uwsm-app 1password"
         "SUPER, return, exec, ghostty +new-window"
         ", code:192, exec, nc -U /run/user/1000/walker/walker.sock"
       ];

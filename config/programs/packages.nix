@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     bun
+    go
     htop
     jq
     nano
