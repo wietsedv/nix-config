@@ -8,7 +8,7 @@
     jq
     nano
     nmap
-    nodejs_24
+    nodejs_26
     tldr
     tmux
     unar
