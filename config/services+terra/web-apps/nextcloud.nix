@@ -32,13 +32,7 @@
       configureRedis = true;
       # notify_push.enable = true;
     };
-    nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
-      {
-        addr = "127.0.0.1";
-        port = config.custom.web-apps.nextcloud.port;
-      }
-    ];
   };
 
-  custom.web-apps.nextcloud.port = 8080;
+  custom.web-apps.nextcloud.port = config.services.nginx.defaultHTTPListenPort;
 }

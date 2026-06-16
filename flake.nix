@@ -27,8 +27,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    erpnext = {
-      url = "git+ssh://git@github.com/wietsedv/erpnext-nix.git?ref=main";
+    frappe = {
+      url = "git+ssh://git@github.com/wietsedv/frappe-nix.git?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -123,10 +123,10 @@
         mars = makeServer "mars" [ ];
         terra = makeServer "terra" [
           inputs.private.nixosModules.terra
-          inputs.erpnext.nixosModules.default
+          inputs.frappe.nixosModules.default
           ({ ... }: {
             nixpkgs.overlays = [
-              inputs.erpnext.overlays.default
+              inputs.frappe.overlays.default
             ];
           })
         ];

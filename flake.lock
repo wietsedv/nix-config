@@ -56,27 +56,6 @@
         "type": "github"
       }
     },
-    "erpnext": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1781531668,
-        "narHash": "sha256-bcjDsqGtP+4FvdQVg6u+fM4OKlxd96Yq5sKGlpzjhS0=",
-        "ref": "main",
-        "rev": "70fe26b05ef20bf78d3d0998564547a6cd88328c",
-        "revCount": 6,
-        "type": "git",
-        "url": "ssh://git@github.com/wietsedv/erpnext-nix.git"
-      },
-      "original": {
-        "ref": "main",
-        "type": "git",
-        "url": "ssh://git@github.com/wietsedv/erpnext-nix.git"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -91,6 +70,27 @@
         "owner": "edolstra",
         "repo": "flake-compat",
         "type": "github"
+      }
+    },
+    "frappe": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781616627,
+        "narHash": "sha256-Wje7fKqbn1TjQ27dgUDlRJcA7D9Gun3AUD1CYLReaG0=",
+        "ref": "main",
+        "rev": "25d3fec9e2e3b3be8705a48a199881d613b74f6f",
+        "revCount": 13,
+        "type": "git",
+        "url": "ssh://git@github.com/wietsedv/frappe-nix.git"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "ssh://git@github.com/wietsedv/frappe-nix.git"
       }
     },
     "gitignore": {
@@ -245,7 +245,7 @@
       "inputs": {
         "disko": "disko",
         "elephant": "elephant",
-        "erpnext": "erpnext",
+        "frappe": "frappe",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nix-darwin": "nix-darwin",

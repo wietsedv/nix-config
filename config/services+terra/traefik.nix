@@ -21,6 +21,11 @@ in
   };
 
   config = {
+    services.nginx = {
+      defaultHTTPListenPort = 8080;
+      defaultListenAddresses = [ "127.0.0.1" ];
+    };
+
     networking.firewall.interfaces."lan0".allowedTCPPorts = [
       80
       443
