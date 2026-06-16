@@ -56,6 +56,27 @@
         "type": "github"
       }
     },
+    "erpnext": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781531668,
+        "narHash": "sha256-bcjDsqGtP+4FvdQVg6u+fM4OKlxd96Yq5sKGlpzjhS0=",
+        "ref": "main",
+        "rev": "70fe26b05ef20bf78d3d0998564547a6cd88328c",
+        "revCount": 6,
+        "type": "git",
+        "url": "ssh://git@github.com/wietsedv/erpnext-nix.git"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "ssh://git@github.com/wietsedv/erpnext-nix.git"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -224,6 +245,7 @@
       "inputs": {
         "disko": "disko",
         "elephant": "elephant",
+        "erpnext": "erpnext",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nix-darwin": "nix-darwin",

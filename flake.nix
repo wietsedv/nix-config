@@ -27,6 +27,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    erpnext = {
+      url = "git+ssh://git@github.com/wietsedv/erpnext-nix.git?ref=main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     private = {
       url = "git+ssh://git@github.com/wietsedv/nix-config-private.git?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -116,7 +121,15 @@
 
         luna = makeServer "luna" [ inputs.disko.nixosModules.disko ];
         mars = makeServer "mars" [ ];
-        terra = makeServer "terra" [ inputs.private.nixosModules.terra ];
+        terra = makeServer "terra" [
+          inputs.private.nixosModules.terra
+          inputs.erpnext.nixosModules.default
+          ({ ... }: {
+            nixpkgs.overlays = [
+              inputs.erpnext.overlays.default
+            ];
+          })
+        ];
       };
     };
 }
