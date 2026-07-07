@@ -20,6 +20,7 @@
     "orcaslicer"
     "proton-mail-bridge"
     "spotify"
+    "super-productivity"
     "thunderbird"
     "ungoogled-chromium"
     "visual-studio-code"
