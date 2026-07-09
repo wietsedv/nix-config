@@ -15,6 +15,7 @@
     "kicad"
     "nextcloud-vfs"
     "notunes"
+    "obsidian"
     "onlyoffice"
     "orbstack"
     "orcaslicer"
