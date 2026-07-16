@@ -4,7 +4,7 @@
   users.users.ci = {
     isNormalUser = true;
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOlNqKQeELW25vzw/64496jsxvuNMm2hTl/DJ6kSDxp ci@github-actions"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAMrPHSQ4iIuVM9+/CaINd0U6rbJlzezGaVhOmZYH50Y ci@github-actions"
     ];
   };
 
