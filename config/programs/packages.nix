@@ -14,7 +14,6 @@
     ruby
     tldr
     tmux
-    unar
     wget
     yarn
   ];
