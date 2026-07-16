@@ -3,7 +3,9 @@ updates:
   - package-ecosystem: "nix"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "cron"
+      cronjob: "0 17 * * *"
+      timezone: "Europe/Amsterdam"
     ignore:
       - dependency-name: "private"
       - dependency-name: "frappe"
