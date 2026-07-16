@@ -21,7 +21,7 @@
       _nr () {
         cmd="$1"
         if [ -z "$2" ]; then ${
-          if pkgs.stdenv.isLinux then "nixos-rebuild $cmd --sudo" else "sudo darwin-rebuild $cmd"
+          if pkgs.stdenv.isLinux then "nixos-rebuild $cmd --sudo" else "darwin-rebuild build && sudo darwin-rebuild $cmd"
         }
         else
           _nr-sync "$2" && ssh -t "$2" nixos-rebuild $cmd --sudo
