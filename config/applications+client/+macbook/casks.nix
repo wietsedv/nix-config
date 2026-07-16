@@ -13,6 +13,7 @@
     "gimp"
     "inkscape"
     "kicad"
+    "mgba-app"
     "nextcloud-vfs"
     "notunes"
     "obsidian"
