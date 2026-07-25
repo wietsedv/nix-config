@@ -27,11 +27,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    frappe = {
-      url = "git+ssh://git@github.com/wietsedv/frappe-nix.git?ref=main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     private = {
       url = "git+ssh://git@github.com/wietsedv/nix-config-private.git?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -123,12 +118,6 @@
         mars = makeServer "mars" [ ];
         terra = makeServer "terra" [
           inputs.private.nixosModules.terra
-          inputs.frappe.nixosModules.default
-          ({ ... }: {
-            nixpkgs.overlays = [
-              inputs.frappe.overlays.default
-            ];
-          })
         ];
       };
     };

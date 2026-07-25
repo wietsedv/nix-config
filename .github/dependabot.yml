@@ -8,7 +8,6 @@ updates:
       timezone: "Europe/Amsterdam"
     ignore:
       - dependency-name: "private"
-      - dependency-name: "frappe"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

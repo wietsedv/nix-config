@@ -72,27 +72,6 @@
         "type": "github"
       }
     },
-    "frappe": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1781616627,
-        "narHash": "sha256-Wje7fKqbn1TjQ27dgUDlRJcA7D9Gun3AUD1CYLReaG0=",
-        "ref": "main",
-        "rev": "25d3fec9e2e3b3be8705a48a199881d613b74f6f",
-        "revCount": 13,
-        "type": "git",
-        "url": "ssh://git@github.com/wietsedv/frappe-nix.git"
-      },
-      "original": {
-        "ref": "main",
-        "type": "git",
-        "url": "ssh://git@github.com/wietsedv/frappe-nix.git"
-      }
-    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -245,7 +224,6 @@
       "inputs": {
         "disko": "disko",
         "elephant": "elephant",
-        "frappe": "frappe",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nix-darwin": "nix-darwin",
