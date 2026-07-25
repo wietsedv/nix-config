@@ -206,11 +206,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784992506,
-        "narHash": "sha256-W3UsGjpvJztkscQLAMhEDHxym8yoKRMSNAUM6W+8QeM=",
+        "lastModified": 1784995561,
+        "narHash": "sha256-+mmirTn1/P7n9riEaS11AN8TPwOKF5agMiY/xXXgpxQ=",
         "ref": "main",
-        "rev": "906bff8f15ddff37e8b2c66d7544e1dba6b79f16",
-        "revCount": 86,
+        "rev": "a938d72d5d9187a73812dd1fa02106d0cbe569c7",
+        "revCount": 87,
         "type": "git",
         "url": "ssh://git@github.com/wietsedv/nix-config-private.git"
       },
