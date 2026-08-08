@@ -26,6 +26,7 @@
     };
     extraConfig = ''
       yabai -m rule --add app="^Firefox$" title=" openen$" manage=off
+      yabai -m rule --add app="^Firefox$" title="^Picture-in-picture$" manage=off sticky=on layer=above
     '';
   };
 }
