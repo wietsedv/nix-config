@@ -3,6 +3,8 @@
 {
   environment.systemPackages = with pkgs; [
     bun
+    curl
+    ffmpeg
     gnumake
     gh
     go
