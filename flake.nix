@@ -27,6 +27,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    playwright = {
+      url = "github:pietdevries94/playwright-web-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     private = {
       url = "git+ssh://git@github.com/wietsedv/nix-config-private.git?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -107,6 +112,11 @@
               inputs.sops-nix.nixosModules.default
               {
                 networking.hostName = "thinkpad";
+                nixpkgs.overlays = [
+                  (final: prev: {
+                    inherit (inputs.playwright.packages.${prev.system}) playwright-test playwright-driver;
+                  })
+                ];
                 home-manager.sharedModules = recursiveModules.home targets ++ [
                   inputs.walker.homeManagerModules.default
                 ];
