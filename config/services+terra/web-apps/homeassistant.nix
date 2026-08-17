@@ -63,5 +63,5 @@
     ];
   };
 
-  custom.web-apps.homeassistant.port = config.services.home-assistant.config.http.server_port;
+  custom.web-apps.homeassistant.port = 8123;
 }
