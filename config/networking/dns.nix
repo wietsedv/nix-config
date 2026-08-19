@@ -10,7 +10,7 @@ let
 in
 {
   networking =
-    if pkgs.stdenv.isLinux then
+    if pkgs.stdenv.hostPlatform.isLinux then
       {
         inherit nameservers;
       }

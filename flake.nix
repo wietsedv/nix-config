@@ -114,7 +114,7 @@
                 networking.hostName = "thinkpad";
                 nixpkgs.overlays = [
                   (final: prev: {
-                    inherit (inputs.playwright.packages.${prev.system}) playwright-test playwright-driver;
+                    inherit (inputs.playwright.packages.${prev.stdenv.hostPlatform.system}) playwright-test playwright-driver;
                   })
                 ];
                 home-manager.sharedModules = recursiveModules.home targets ++ [

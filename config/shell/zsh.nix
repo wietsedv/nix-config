@@ -2,7 +2,7 @@
 
 {
   programs.zsh =
-    if pkgs.stdenv.isLinux then
+    if pkgs.stdenv.hostPlatform.isLinux then
       {
         enable = true;
         enableCompletion = true;
@@ -17,5 +17,5 @@
         enableSyntaxHighlighting = true;
       };
 
-  users = if pkgs.stdenv.isLinux then { defaultUserShell = pkgs.zsh; } else { };
+  users = if pkgs.stdenv.hostPlatform.isLinux then { defaultUserShell = pkgs.zsh; } else { };
 }

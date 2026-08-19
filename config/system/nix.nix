@@ -5,7 +5,7 @@
     channel.enable = false;
     gc = {
       automatic = true;
-      dates = lib.mkIf pkgs.stdenv.isLinux "weekly";
+      dates = lib.mkIf pkgs.stdenv.hostPlatform.isLinux "weekly";
       options = "--delete-older-than 30d";
     };
     settings = {

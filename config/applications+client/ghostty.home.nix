@@ -3,18 +3,18 @@
 {
   programs.ghostty = {
     enable = true;
-    package = if pkgs.stdenv.isLinux then pkgs.ghostty else pkgs.ghostty-bin;
+    package = if pkgs.stdenv.hostPlatform.isLinux then pkgs.ghostty else pkgs.ghostty-bin;
     settings = {
       app-notifications = false;
 
       font-family = "MesloLGS Nerd Font Mono";
-      font-size = if pkgs.stdenv.isLinux then 10 else 12;
+      font-size = if pkgs.stdenv.hostPlatform.isLinux then 10 else 12;
       font-thicken = true;
       font-thicken-strength = 7;
 
       macos-titlebar-style = "hidden";
 
-      quit-after-last-window-closed = pkgs.stdenv.isDarwin;
+      quit-after-last-window-closed = pkgs.stdenv.hostPlatform.isDarwin;
 
       theme = "light:VS Code Light Modern,dark:VS Code Dark Modern";
 
