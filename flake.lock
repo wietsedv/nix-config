@@ -238,27 +238,6 @@
         "type": "github"
       }
     },
-    "private": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1788181458,
-        "narHash": "sha256-dNjlXNHjUoCGPEkF9q1hhnzulXTXgCdTuSo2CzlaQ20=",
-        "ref": "main",
-        "rev": "227c144e80dbe8631e05cee1e1d57948a4c9e157",
-        "revCount": 90,
-        "type": "git",
-        "url": "ssh://git@github.com/wietsedv/nix-config-private.git"
-      },
-      "original": {
-        "ref": "main",
-        "type": "git",
-        "url": "ssh://git@github.com/wietsedv/nix-config-private.git"
-      }
-    },
     "root": {
       "inputs": {
         "disko": "disko",
@@ -268,7 +247,6 @@
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "playwright": "playwright",
-        "private": "private",
         "sops-nix": "sops-nix",
         "walker": "walker"
       }

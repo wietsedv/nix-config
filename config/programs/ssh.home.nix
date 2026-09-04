@@ -6,9 +6,9 @@
     enableDefaultConfig = false;
 
     settings = {
-      "luna" = {
-        hostname = "luna.${osConfig.globalDomain}";
-      };
+#      "luna" = {
+#        hostname = "luna.${osConfig.globalDomain}";
+#      };
     };
   };
 }

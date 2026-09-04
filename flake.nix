@@ -32,10 +32,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    private = {
-      url = "git+ssh://git@github.com/wietsedv/nix-config-private.git?ref=main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #private = {
+    #  url = "git+ssh://git@github.com/wietsedv/nix-config-private.git?ref=main";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
     # Walker
     elephant = {
@@ -106,7 +106,7 @@
           in
           nixpkgs.lib.nixosSystem {
             modules = recursiveModules.default targets ++ [
-              inputs.private.nixosModules.default
+              #inputs.private.nixosModules.default
               inputs.home-manager.nixosModules.home-manager
               inputs.lanzaboote.nixosModules.lanzaboote
               inputs.sops-nix.nixosModules.default
