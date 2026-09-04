@@ -1,7 +1,15 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   home.packages = with pkgs; [ shared-mime-info ];
+
+  home.activation.hyprlandMonitorsLua = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    monitors="${config.xdg.configHome}/hypr/monitors.lua"
+    if [ ! -e "$monitors" ]; then
+      run mkdir -p $VERBOSE_ARG "$(dirname "$monitors")"
+      run touch "$monitors"
+    fi
+  '';
 
   services.polkit-gnome.enable = true;
 
@@ -131,7 +139,7 @@
       hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("uwsm-app firefox"))
       hl.bind(mainMod .. " + code:51", hl.dsp.exec_cmd("uwsm-app 1password"))
       hl.bind(mainMod .. " + return", hl.dsp.exec_cmd("ghostty +new-window"))
-      hl.bind("code:192", hl.dsp.exec_cmd("nc -U /run/user/1000/walker/walker.sock"))
+      hl.bind("code:192", hl.dsp.exec_cmd("nc -U /run/user/$(id -u)/walker/walker.sock"))
 
       -- Move focus with mainMod + arrow keys
       hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
