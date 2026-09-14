@@ -113,12 +113,28 @@
               {
                 networking.hostName = "thinkpad";
                 nixpkgs.overlays = [
-                  (final: prev: {
-                    inherit (inputs.playwright.packages.${prev.stdenv.hostPlatform.system})
-                      playwright-test
-                      playwright-driver
-                      ;
-                  })
+                  (final: prev:
+                    let
+                      # Upstream playwright-web-flake omits libmanette, which the
+                      # webkit build links against. Patch its source before use.
+                      warning = "playwright: local workaround active, adding libmanette to playwright-webkit buildInputs. Upstream playwright-web-flake and nixpkgs both omit it, so webkit fails autoPatchelf. Drop this overlay in flake.nix once upstream ships the fix.";
+                      src = nixpkgs.lib.warn warning (
+                        prev.runCommand "playwright-driver-src" { } ''
+                          cp -r ${inputs.playwright}/playwright-driver $out
+                          chmod -R +w $out
+                          sed -i \
+                            -e 's/^  libjxl,$/  libjxl,\n  libmanette,/' \
+                            -e 's/^      libgpg-error$/      libgpg-error\n      libmanette/' \
+                            $out/webkit.nix
+                          grep -q libmanette $out/webkit.nix
+                        ''
+                      );
+                      playwright = final.callPackage "${src}/driver.nix" { };
+                    in
+                    {
+                      playwright-test = playwright.playwright-test;
+                      playwright-driver = playwright.playwright-core;
+                    })
                 ];
                 home-manager.sharedModules = recursiveModules.home targets ++ [
                   inputs.walker.homeManagerModules.default
