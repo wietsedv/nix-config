@@ -359,11 +359,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784217994,
-        "narHash": "sha256-gxHJsrJZo2qbKK47Kf/9ho3i/HhRwkL8XvPnczGPd9E=",
+        "lastModified": 1789470158,
+        "narHash": "sha256-vChiK+AXFDfxiiQHtXQcxiq1XbFMpTJyeuotkR+dqTc=",
         "owner": "abenz1267",
         "repo": "walker",
-        "rev": "42b3ed88abf50bc52638fb2835b7f17e3ea3ac4c",
+        "rev": "dcb4d6879392a8b930628300bd192d81294f0b6f",
         "type": "github"
       },
       "original": {
