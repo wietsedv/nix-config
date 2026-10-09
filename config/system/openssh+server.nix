@@ -1,7 +1,15 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
-  environment.enableAllTerminfo = true;
+  environment.systemPackages = (
+    map (x: x.terminfo) (
+      with pkgs.pkgsBuildBuild;
+      [
+        ghostty
+        tmux
+      ]
+    )
+  );
 
   services.openssh = {
     enable = true;
