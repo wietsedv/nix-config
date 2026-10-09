@@ -4,7 +4,7 @@
   services = {
     nextcloud = {
       enable = true;
-      package = pkgs.nextcloud34;
+      package = pkgs.nextcloud35;
       autoUpdateApps.enable = true;
       hostName = "nextcloud.${config.networking.hostName}.${config.globalDomain}";
 
@@ -30,7 +30,7 @@
 
       database.createLocally = true;
       configureRedis = true;
-      # notify_push.enable = true;
+      notify_push.enable = true;
     };
   };
 
