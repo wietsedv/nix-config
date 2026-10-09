@@ -30,7 +30,11 @@
 
       database.createLocally = true;
       configureRedis = true;
-      notify_push.enable = true;
+      notify_push = {
+        enable = true;
+        bendDomainToLocalhost = true;
+        nextcloudUrl = "http://${config.services.nextcloud.hostName}:${toString config.services.nginx.defaultHTTPListenPort}";
+      };
     };
   };
 
