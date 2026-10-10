@@ -1,12 +1,27 @@
-{ ... }:
+{ pkgs, ... }:
 
+let
+  # Reuse the running Ghostty instance; launching the binary cold-starts a new process each time.
+  # Spawning from the front window's terminal inherits its working directory.
+  ghosttyNewWindow = pkgs.writeText "ghostty-new-window.applescript" ''
+    if application id "com.mitchellh.ghostty" is running then
+      tell application id "com.mitchellh.ghostty"
+        if (count of windows) > 0 then
+          perform action "new_window" on focused terminal of selected tab of front window
+        else
+          new window
+        end if
+      end tell
+    end if
+    tell application id "com.mitchellh.ghostty" to activate
+  '';
+in
 {
   services.skhd = {
     enable = true;
     skhdConfig = ''
       # Commands
-      # Reuse the running Ghostty instance; launching the binary cold-starts a new process each time
-      cmd - return : osascript -e 'if application id "com.mitchellh.ghostty" is running then' -e 'tell application id "com.mitchellh.ghostty" to new window' -e 'end if' -e 'tell application id "com.mitchellh.ghostty" to activate'
+      cmd - return : osascript ${ghosttyNewWindow}
       shift + cmd - o : /Applications/Firefox.app/Contents/MacOS/firefox
       alt + cmd - return : open ~
 

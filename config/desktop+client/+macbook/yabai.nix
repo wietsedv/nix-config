@@ -3,13 +3,13 @@
 {
   services.yabai = {
     enable = true;
-    enableScriptingAddition = true;
+    # Scripting addition needs SIP partially disabled; keep SIP on
+    enableScriptingAddition = false;
     config = {
       # Window placement
       layout = "bsp";
       split_ratio = 0.5;
       auto_balance = "off";
-      window_topmost = "on";
 
       # Mouse
       mouse_modifier = "alt";
@@ -26,7 +26,7 @@
     };
     extraConfig = ''
       yabai -m rule --add app="^Firefox$" title=" openen$" manage=off
-      yabai -m rule --add app="^Firefox$" title="^Picture-in-picture$" manage=off sticky=on layer=above
+      yabai -m rule --add app="^Firefox$" title="^Picture-in-picture$" manage=off
     '';
   };
 }
