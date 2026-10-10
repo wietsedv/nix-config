@@ -14,7 +14,8 @@
 
       macos-titlebar-style = "hidden";
 
-      quit-after-last-window-closed = pkgs.stdenv.hostPlatform.isDarwin;
+      # Keep running on macOS so skhd's cmd+return opens a window instantly
+      quit-after-last-window-closed = false;
 
       theme = "light:VS Code Light Modern,dark:VS Code Dark Modern";
 

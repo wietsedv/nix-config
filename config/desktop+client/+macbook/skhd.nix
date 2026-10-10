@@ -5,7 +5,8 @@
     enable = true;
     skhdConfig = ''
       # Commands
-      cmd - return : /etc/profiles/per-user/wietse/bin/ghostty
+      # Reuse the running Ghostty instance; launching the binary cold-starts a new process each time
+      cmd - return : osascript -e 'if application id "com.mitchellh.ghostty" is running then' -e 'tell application id "com.mitchellh.ghostty" to new window' -e 'end if' -e 'tell application id "com.mitchellh.ghostty" to activate'
       shift + cmd - o : /Applications/Firefox.app/Contents/MacOS/firefox
       alt + cmd - return : open ~
 
