@@ -24,6 +24,7 @@ in
       cmd - return : osascript ${ghosttyNewWindow}
       shift + cmd - o : /Applications/Firefox.app/Contents/MacOS/firefox
       alt + cmd - return : open ~
+      alt + cmd - t : osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
 
       # Focus window
       alt - a : yabai -m window --focus west
