@@ -47,10 +47,41 @@ let
     };
   };
 
+  # Upstream hardcodes the network icon as an mxc://maunium.net URI, which
+  # this homeserver can't fetch (federation is off). Read it from
+  # MAUTRIX_NETWORK_ICON instead, set to a locally uploaded copy at start.
+  withLocalNetworkIcon =
+    package:
+    package.overrideAttrs (old: {
+      postPatch = (old.postPatch or "") + ''
+        sed -i 's|"mxc://maunium.net/[A-Za-z0-9]*"|localNetworkIcon|' pkg/connector/connector.go
+        grep -q 'NetworkIcon: *localNetworkIcon,' pkg/connector/connector.go
+        cat > pkg/connector/localnetworkicon.go <<'EOF'
+        package connector
+
+        import (
+        	"os"
+
+        	"maunium.net/go/mautrix/id"
+        )
+
+        var localNetworkIcon = id.ContentURIString(os.Getenv("MAUTRIX_NETWORK_ICON"))
+        EOF
+      '';
+    });
+
+  # The bridge logo shipped in each repo, rendered to PNG for clients.
+  iconFor =
+    name: package:
+    pkgs.runCommand "mautrix-${name}-icon.png" { nativeBuildInputs = [ pkgs.librsvg ]; } ''
+      rsvg-convert --width 512 --height 512 --keep-aspect-ratio ${package.src}/.idea/icon.svg -o $out
+    '';
+
   bridges = [
     {
       name = "signal";
       package = pkgs.mautrix-signal;
+      iconSettings = [ ".network.note_to_self_avatar" ];
       settings.network = {
         displayname_template = "{{or .Nickname .ContactName .ProfileName .PhoneNumber \"Unknown user\"}} (SG)";
         extev_polls = true;
@@ -59,6 +90,7 @@ let
     {
       name = "telegram";
       package = mautrix-telegram;
+      iconSettings = [ ".network.saved_message_avatar" ];
       settings.network = {
         displayname_template = "{{ if .Deleted }}Deleted account {{or .Username .UserID }}{{ else }}{{if .FullName}}{{.FullName}}{{else}}~ {{or .Username .UserID }}{{end}}{{ end }} (TG)";
       };
@@ -66,6 +98,7 @@ let
     {
       name = "whatsapp";
       package = pkgs.mautrix-whatsapp;
+      iconSettings = [ ];
       settings.network = {
         displayname_template = "{{if .FullName}}{{.FullName}}{{else}}~ {{or .BusinessName .FirstName .PushName .Phone}}{{end}} (WA)";
         enable_status_broadcast = false;
@@ -81,6 +114,10 @@ in
     (builtins.map (
       bridge:
       let
+        package = withLocalNetworkIcon bridge.package;
+        icon = iconFor bridge.name bridge.package;
+        homeserverAddress = "http://127.0.0.1:${toString config.services.matrix-continuwuity.settings.global.port}";
+
         settings = lib.mergeAttrsList [
           {
             database = {
@@ -88,7 +125,7 @@ in
               uri = "file:${dataDir}/mautrix-${bridge.name}.db?_txlock=immediate";
             };
             homeserver = {
-              address = "http://127.0.0.1:${toString config.services.matrix-continuwuity.settings.global.port}";
+              address = homeserverAddress;
               domain = config.services.matrix-continuwuity.settings.global.server_name;
             };
           }
@@ -100,6 +137,8 @@ in
         registrationFile = "${dataDir}/${bridge.name}-registration.yaml";
         configFile = "${dataDir}/${bridge.name}-config.yaml";
         configSecretsFile = "${dataDir}/${bridge.name}-config-secrets.yaml";
+        iconMxcFile = "${dataDir}/icon.mxc";
+        iconSrcFile = "${dataDir}/icon.src";
 
         staticConfigFile = (pkgs.formats.yaml { }).generate "${bridge.name}-config.yaml" settings;
       in
@@ -125,7 +164,7 @@ in
             # generate the appservice's registration file if absent
             if [ ! -f '${registrationFile}' ]; then
               cp '${staticConfigFile}' '${configFile}'
-              ${bridge.package}/bin/mautrix-${bridge.name} \
+              ${package}/bin/mautrix-${bridge.name} \
                 --generate-registration \
                 --config='${configFile}' \
                 --registration='${registrationFile}'
@@ -143,11 +182,38 @@ in
               rm -f '${configFile}'
               mv '${configFile}.tmp' '${configFile}'
             fi
+
+            # upload the bridge icon to the local homeserver once per icon
+            if [ "$(cat '${iconSrcFile}' 2>/dev/null)" != '${icon}' ]; then
+              as_token=$(${pkgs.yq}/bin/yq -r .as_token '${registrationFile}')
+              if icon_mxc=$(${pkgs.curl}/bin/curl -sSf -X POST \
+                  -H "Authorization: Bearer $as_token" \
+                  -H 'Content-Type: image/png' \
+                  --data-binary @'${icon}' \
+                  '${homeserverAddress}/_matrix/media/v3/upload?filename=${bridge.name}.png' \
+                  | ${pkgs.jq}/bin/jq -er .content_uri); then
+                echo "$icon_mxc" > '${iconMxcFile}'
+                echo '${icon}' > '${iconSrcFile}'
+              else
+                echo "mautrix-${bridge.name}: failed to upload bridge icon" >&2
+              fi
+            fi
+
+            # point all avatar settings at the local icon
+            if [ -f '${iconMxcFile}' ]; then
+              ICON_MXC=$(cat '${iconMxcFile}') ${pkgs.yq-go}/bin/yq -i '${
+                lib.concatMapStringsSep " | " (path: "${path} = strenv(ICON_MXC)") (
+                  [ ".appservice.bot.avatar" ] ++ bridge.iconSettings
+                )
+              }' '${configFile}'
+            fi
           '';
 
           serviceConfig = {
-            ExecStart = ''
-              ${bridge.package}/bin/mautrix-${bridge.name} \
+            ExecStart = pkgs.writeShellScript "mautrix-${bridge.name}-start" ''
+              MAUTRIX_NETWORK_ICON=$(cat '${iconMxcFile}' 2>/dev/null || true)
+              export MAUTRIX_NETWORK_ICON
+              exec ${package}/bin/mautrix-${bridge.name} \
                 --config='${configFile}' \
                 --registration='${registrationFile}'
             '';
