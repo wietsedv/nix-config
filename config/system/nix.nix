@@ -9,7 +9,9 @@
       options = "--delete-older-than 30d";
     };
     settings = {
-      auto-optimise-store = true;
+      # On darwin, hardlinking into /nix/store/.links makes TCC resolve binaries (e.g. skhd) to
+      # that 300k-entry directory, and every permission check through them stalls for seconds.
+      auto-optimise-store = pkgs.stdenv.hostPlatform.isLinux;
       experimental-features = [
         "nix-command"
         "flakes"
