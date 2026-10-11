@@ -11,6 +11,7 @@
     "firefox"
     "freecad"
     "gimp"
+    "hermes-desktop"
     "inkscape"
     "kicad"
     "nextcloud-vfs"

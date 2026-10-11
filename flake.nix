@@ -32,6 +32,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hermes-agent = {
+      url = "github:NousResearch/hermes-agent";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     private = {
       url = "git+ssh://git@github.com/wietsedv/nix-config-private.git?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -147,6 +153,7 @@
         mars = makeServer "mars" [ ];
         terra = makeServer "terra" [
           inputs.private.nixosModules.terra
+          inputs.hermes-agent.nixosModules.default
         ];
       };
     };
