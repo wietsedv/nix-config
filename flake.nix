@@ -38,6 +38,8 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    llm-agents.url = "github:numtide/llm-agents.nix";
+
     private = {
       url = "git+ssh://git@github.com/wietsedv/nix-config-private.git?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -96,6 +98,7 @@
             inputs.home-manager.darwinModules.home-manager
             {
               networking.hostName = "macbook";
+              nixpkgs.overlays = [ inputs.llm-agents.overlays.shared-nixpkgs ];
               home-manager.sharedModules = recursiveModules.home targets;
             }
           ];
@@ -119,6 +122,7 @@
               {
                 networking.hostName = "thinkpad";
                 nixpkgs.overlays = [
+                  inputs.llm-agents.overlays.shared-nixpkgs
                   (final: prev:
                     let
                       # Upstream playwright-web-flake omits libmanette, which the
@@ -156,6 +160,7 @@
           inputs.hermes-agent.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
           {
+            nixpkgs.overlays = [ inputs.llm-agents.overlays.shared-nixpkgs ];
             home-manager.sharedModules = recursiveModules.home [
               "terra"
               "server"
