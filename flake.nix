@@ -154,6 +154,14 @@
         terra = makeServer "terra" [
           inputs.private.nixosModules.terra
           inputs.hermes-agent.nixosModules.default
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager.sharedModules = recursiveModules.home [
+              "terra"
+              "server"
+              "nixos"
+            ];
+          }
         ];
       };
     };
