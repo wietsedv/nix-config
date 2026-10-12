@@ -18,7 +18,6 @@
     "notunes"
     "obsidian"
     "onlyoffice"
-    "orbstack"
     "orcaslicer"
     "proton-mail-bridge"
     "ungoogled-chromium"
