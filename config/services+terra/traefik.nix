@@ -76,6 +76,7 @@ in
             endpoint = "unix:///var/run/podman/podman.sock";
             defaultRule = "Host(`{{ normalize .ContainerName }}.${domain}`)";
             allowEmptyServices = true;
+            exposedByDefault = false;
           };
         };
       };
