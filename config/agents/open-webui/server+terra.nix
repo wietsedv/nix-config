@@ -9,7 +9,7 @@
   services.open-webui = {
     enable = true;
     port = 8090;
-    environmentFile = "/var/lib/open-webui.env";
+    environmentFile = "/var/lib/open-webui/open-webui.env";
     environment = {
       # Option default, dropped once the attrset is set.
       SCARF_NO_ANALYTICS = "True";
