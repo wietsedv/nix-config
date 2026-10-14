@@ -6,12 +6,10 @@
       name = "alfred";
       greedy = true;
     }
-    "claude"
     "element"
     "firefox"
     "freecad"
     "gimp"
-    "hermes-desktop"
     "inkscape"
     "kicad"
     "nextcloud-vfs"

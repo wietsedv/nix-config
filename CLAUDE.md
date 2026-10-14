@@ -9,7 +9,7 @@ NixOS + nix-darwin + home-manager flake. Hosts: `thinkpad` (NixOS laptop),
   the `makeServer` helper; clients spelled out.
 - `recursive-imports.nix`: module discovery. All of `config/` is walked; no
   file is imported by hand.
-- `config/`: every module, grouped by concern: `applications+client/`,
+- `config/`: every module, grouped by concern: `agents/`, `applications+client/`,
   `desktop+client/`, `networking/`, `programs/`, `services+terra/`, `shell/`,
   `system/`.
 - `secrets/secrets.yaml`: sops-nix encrypted.
