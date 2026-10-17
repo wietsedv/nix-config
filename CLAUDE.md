@@ -17,6 +17,11 @@ NixOS + nix-darwin + home-manager flake. Hosts: `thinkpad` (NixOS laptop),
   file is imported by hand.
 - `config/`: every module, grouped by concern (see "Where config goes").
 - `secrets/secrets.yaml`: sops-nix encrypted.
+- `config.globalDomain`: base domain for host and service names
+  (`luna.${config.globalDomain}`). Declared in the private flake input
+  (`inputs.private.nixosModules.default`), so it is not found by grepping this
+  repo. Never write its value into this repo. In home-manager modules use
+  `osConfig.globalDomain`.
 - `build.sh <host>`: builds a server's config on that server itself
   (`nixos-rebuild build --target-host --build-host`). Local host: plain
   `nixos-rebuild`.
@@ -56,12 +61,15 @@ that matches:
 2. `desktop/`: exists only because of a graphical session: WM, bar,
    notifications, lock screen, fonts, theme, key remapping, keyring/polkit.
    GUI apps go in `desktop/apps/`.
-3. `programs/`: used from a terminal. Always in a subdirectory, first match:
-   - `agents/`: AI agent CLIs and their MCP servers.
+3. `programs/`: used from a terminal. Always in a subdirectory, first match.
+   Development concerns live under `programs/+dev/`, so they are only
+   imported on dev hosts:
+   - `+dev/agents/`: AI agent CLIs and their MCP servers.
    - `shell/`: the interactive environment: zsh, prompt, direnv, file manager.
-   - `git/`: git and forge CLIs (gh, glab).
-   - `languages/`: compilers, runtimes, LSPs, formatters; one file per language.
-   - `containers/`: docker, podman.
+   - `+dev/git/`: git and forge CLIs (gh, glab).
+   - `+dev/languages/`: compilers, runtimes, LSPs, formatters; one file per
+     language.
+   - `+dev/containers/`: docker, podman.
    - `tools/`: everything else (`packages.nix` for plain one-liners).
 4. `system/`: everything else about the machine: boot, hardware, filesystems,
    backups, users, locale, power, nix, OS-level settings (darwin defaults,
@@ -71,7 +79,7 @@ that matches:
 Placing the target:
 
 - Use a `+target/` subdirectory when a concern has 3+ files for that target;
-  otherwise suffix the file: `programs/containers/docker+thinkpad.nix`.
+  otherwise suffix the file: `programs/+dev/containers/docker+thinkpad.nix`.
 - Never repeat an implied target: `+client/foo+thinkpad.nix` is just
   `foo+thinkpad.nix`. Use the narrowest target that is exact (`dev`, not
   `client+terra`).
