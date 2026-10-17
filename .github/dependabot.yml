@@ -6,6 +6,11 @@ updates:
       interval: "cron"
       cronjob: "0 17 * * *"
       timezone: "Europe/Amsterdam"
+    cooldown:
+      default-days: 3
+      exclude:
+        - "nixpkgs"
+        - "llm-agents"
     ignore:
       - dependency-name: "private"
   - package-ecosystem: "github-actions"
