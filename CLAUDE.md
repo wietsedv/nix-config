@@ -1,5 +1,11 @@
 # CLAUDE.md
 
+## Always `git pull` before making changes
+
+The repo is edited from several machines and dependabot merges PRs upstream,
+so the local checkout is often behind. Run `git pull` before touching any
+file, so changes aren't made against a stale tree.
+
 ## Repo structure
 
 NixOS + nix-darwin + home-manager flake. Hosts: `thinkpad` (NixOS laptop),

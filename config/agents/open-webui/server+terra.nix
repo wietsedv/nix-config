@@ -1,11 +1,8 @@
 { config, ... }:
 
 {
-  # Chat frontend for OpenAI-compatible backends. The initial connection is the
-  # Hermes API server; OPENAI_API_KEY must equal API_SERVER_KEY in
-  # /var/lib/hermes/hermes.env. Connection settings are persisted in the
-  # database after first start; later changes (and extra backends) go through
-  # Admin Settings -> Connections, not these variables.
+  # Chat frontend for OpenAI-compatible backends. Connections are configured in
+  # Admin Settings -> Connections and persisted in the database.
   services.open-webui = {
     enable = true;
     port = 8090;
@@ -18,7 +15,6 @@
 
       WEBUI_URL = "https://chat.${config.networking.hostName}.${config.globalDomain}";
       ENABLE_OLLAMA_API = "False";
-      OPENAI_API_BASE_URL = "http://127.0.0.1:8642/v1";
     };
   };
 

@@ -32,12 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hermes-agent = {
-      url = "github:NousResearch/hermes-agent";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -146,7 +140,6 @@
         mars = makeServer "mars" [ ];
         terra = makeServer "terra" [
           inputs.private.nixosModules.terra
-          inputs.hermes-agent.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
           {
             nixpkgs.overlays = [ inputs.llm-agents.overlays.shared-nixpkgs ];
