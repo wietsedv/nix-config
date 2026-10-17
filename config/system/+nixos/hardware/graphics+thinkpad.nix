@@ -1,8 +1,6 @@
 { pkgs, ... }:
 
 {
-  hardware.bluetooth.enable = true;
-
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -11,6 +9,4 @@
       vpl-gpu-rt
     ];
   };
-
-  services.blueman.enable = true;
 }

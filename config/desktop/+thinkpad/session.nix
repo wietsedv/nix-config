@@ -11,10 +11,6 @@
 
   security.rtkit.enable = true;
 
-  services.clamav = {
-    updater.enable = true;
-  };
-
   services.getty = {
     autologinOnce = true;
     autologinUser = "wietse";

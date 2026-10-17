@@ -65,15 +65,20 @@
         home = recursiveImports "home";
       };
 
+      serverTargets =
+        hostName: extraTargets:
+        [
+          hostName
+          "server"
+          "nixos"
+        ]
+        ++ extraTargets;
+
       makeServer =
-        hostName: modules:
+        hostName: extraTargets: modules:
         nixpkgs.lib.nixosSystem {
           modules =
-            recursiveModules.default [
-              hostName
-              "server"
-              "nixos"
-            ]
+            recursiveModules.default (serverTargets hostName extraTargets)
             ++ [
               { networking.hostName = hostName; }
               inputs.private.nixosModules.default
@@ -87,6 +92,7 @@
           targets = [
             "macbook"
             "client"
+            "dev"
           ];
         in
         nix-darwin.lib.darwinSystem {
@@ -107,6 +113,7 @@
             targets = [
               "thinkpad"
               "client"
+              "dev"
               "nixos"
             ];
           in
@@ -120,14 +127,16 @@
                 networking.hostName = "thinkpad";
                 nixpkgs.overlays = [
                   inputs.llm-agents.overlays.shared-nixpkgs
-                  (final: prev:
+                  (
+                    final: prev:
                     let
                       playwright = final.callPackage "${inputs.playwright}/playwright-driver/driver.nix" { };
                     in
                     {
                       playwright-test = playwright.playwright-test;
                       playwright-driver = playwright.playwright-core;
-                    })
+                    }
+                  )
                 ];
                 home-manager.sharedModules = recursiveModules.home targets ++ [
                   inputs.walker.homeManagerModules.default
@@ -136,20 +145,19 @@
             ];
           };
 
-        luna = makeServer "luna" [ inputs.disko.nixosModules.disko ];
-        mars = makeServer "mars" [ ];
-        terra = makeServer "terra" [
-          inputs.private.nixosModules.terra
-          inputs.home-manager.nixosModules.home-manager
-          {
-            nixpkgs.overlays = [ inputs.llm-agents.overlays.shared-nixpkgs ];
-            home-manager.sharedModules = recursiveModules.home [
-              "terra"
-              "server"
-              "nixos"
+        luna = makeServer "luna" [ ] [ inputs.disko.nixosModules.disko ];
+        mars = makeServer "mars" [ ] [ ];
+        terra =
+          makeServer "terra"
+            [ "dev" ]
+            [
+              inputs.private.nixosModules.terra
+              inputs.home-manager.nixosModules.home-manager
+              {
+                nixpkgs.overlays = [ inputs.llm-agents.overlays.shared-nixpkgs ];
+                home-manager.sharedModules = recursiveModules.home (serverTargets "terra" [ "dev" ]);
+              }
             ];
-          }
-        ];
       };
     };
 }

@@ -1,7 +1,11 @@
 { config, lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ shared-mime-info ];
+  home.packages = with pkgs; [
+    brightnessctl
+    nwg-displays
+    shared-mime-info
+  ];
 
   home.activation.hyprlandMonitorsLua = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     monitors="${config.xdg.configHome}/hypr/monitors.lua"
