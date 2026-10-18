@@ -12,7 +12,7 @@
     "gimp"
     "inkscape"
     "kicad"
-    "nextcloud-vfs"
+    "nextcloud"
     "notunes"
     "obsidian"
     "onlyoffice"
