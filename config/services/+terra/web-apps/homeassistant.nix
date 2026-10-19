@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   services.home-assistant = {
@@ -60,6 +60,7 @@
       "isal"
       "shelly"
       "apcupsd"
+      "mcp_server"
     ];
   };
 
