@@ -53,13 +53,13 @@
     };
     extraComponents = [
       "mqtt"
-      "cast"
       "github"
       "backup"
       "esphome"
       "dhcp"
       "isal"
       "shelly"
+      "apcupsd"
     ];
   };
 
