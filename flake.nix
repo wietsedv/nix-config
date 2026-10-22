@@ -65,6 +65,20 @@
         home = recursiveImports "home";
       };
 
+      devOverlays = [
+        inputs.llm-agents.overlays.shared-nixpkgs
+        (
+          final: prev:
+          let
+            playwright = final.callPackage "${inputs.playwright}/playwright-driver/driver.nix" { };
+          in
+          {
+            playwright-test = playwright.playwright-test;
+            playwright-driver = playwright.playwright-core;
+          }
+        )
+      ];
+
       serverTargets =
         hostName: extraTargets:
         [
@@ -101,7 +115,7 @@
             inputs.home-manager.darwinModules.home-manager
             {
               networking.hostName = "macbook";
-              nixpkgs.overlays = [ inputs.llm-agents.overlays.shared-nixpkgs ];
+              nixpkgs.overlays = devOverlays;
               home-manager.sharedModules = recursiveModules.home targets;
             }
           ];
@@ -125,19 +139,7 @@
               inputs.sops-nix.nixosModules.default
               {
                 networking.hostName = "thinkpad";
-                nixpkgs.overlays = [
-                  inputs.llm-agents.overlays.shared-nixpkgs
-                  (
-                    final: prev:
-                    let
-                      playwright = final.callPackage "${inputs.playwright}/playwright-driver/driver.nix" { };
-                    in
-                    {
-                      playwright-test = playwright.playwright-test;
-                      playwright-driver = playwright.playwright-core;
-                    }
-                  )
-                ];
+                nixpkgs.overlays = devOverlays;
                 home-manager.sharedModules = recursiveModules.home targets ++ [
                   inputs.walker.homeManagerModules.default
                 ];
@@ -154,7 +156,7 @@
               inputs.private.nixosModules.terra
               inputs.home-manager.nixosModules.home-manager
               {
-                nixpkgs.overlays = [ inputs.llm-agents.overlays.shared-nixpkgs ];
+                nixpkgs.overlays = devOverlays;
                 home-manager.sharedModules = recursiveModules.home (serverTargets "terra" [ "dev" ]);
               }
             ];

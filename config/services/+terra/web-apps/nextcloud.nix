@@ -9,8 +9,6 @@
       hostName = "nextcloud.${config.networking.hostName}.${config.globalDomain}";
 
       config = {
-        adminuser = "wietse";
-        adminpassFile = "/var/lib/nextcloud/adminpass";
         dbtype = "pgsql";
       };
       settings = {
