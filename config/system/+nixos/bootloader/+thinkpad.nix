@@ -1,8 +1,6 @@
 { ... }:
 
 {
-  boot.initrd.systemd.enable = true;
-
   boot.lanzaboote = {
     enable = true;
     configurationLimit = 10;
