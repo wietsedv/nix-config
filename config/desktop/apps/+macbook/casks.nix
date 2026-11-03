@@ -10,6 +10,7 @@
     "firefox"
     "freecad"
     "gimp"
+    "herdr-app"
     "inkscape"
     "kicad"
     "nextcloud"
