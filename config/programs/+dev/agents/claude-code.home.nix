@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.claude-code = {
@@ -7,6 +7,8 @@
       disableTelemetry = true;
     };
     enableMcpIntegration = true;
-    skills.herdr = "${config.programs.herdr.package}/share/skills/herdr/herdr";
+    skills = {
+      herdr = ./skills/herdr;
+    };
   };
 }
