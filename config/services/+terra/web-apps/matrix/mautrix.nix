@@ -41,11 +41,9 @@ let
       };
     };
     backfill.enabled = true;
-    double_puppet.secrets = {
-      "${config.globalDomain}" =
-        "as_token:OophieTh4Eid8Ti9me7eituigeireete8poo1liu7fe1Aiph7Oopeikoovooghae";
-    };
   };
+
+  doublePuppetTokenFile = "/var/lib/mautrix-doublepuppet/as_token";
 
   # Upstream hardcodes the network icon as an mxc://maunium.net URI, which
   # this homeserver can't fetch (federation is off). Read it from
@@ -176,6 +174,10 @@ in
               | .[0].appservice.hs_token = .[1].hs_token
               | .[0]' '${staticConfigFile}' '${registrationFile}' > '${configFile}'
 
+            # inject the double-puppet token
+            DOUBLE_PUPPET_SECRET="as_token:$(cat "$CREDENTIALS_DIRECTORY/double-puppet-as-token")" \
+              ${pkgs.yq-go}/bin/yq -i '.double_puppet.secrets."${config.globalDomain}" = strenv(DOUBLE_PUPPET_SECRET)' '${configFile}'
+
             # overwrite config with secrets if they exist
             if [ -f "${configSecretsFile}" ]; then
               ${pkgs.yq-go}/bin/yq eval-all 'select(fileIndex == 0) *+ select(fileIndex == 1)' '${configFile}' '${configSecretsFile}' > '${configFile}.tmp'
@@ -217,6 +219,8 @@ in
                 --config='${configFile}' \
                 --registration='${registrationFile}'
             '';
+
+            LoadCredential = [ "double-puppet-as-token:${doublePuppetTokenFile}" ];
 
             Type = "simple";
             Restart = "always";
