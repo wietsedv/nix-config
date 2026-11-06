@@ -7,6 +7,12 @@
     internalInterfaces = [ "lan0" ];
   };
 
+  networking.firewall.filterForward = true;
+  networking.firewall.extraForwardRules = ''
+    iifname "tailscale0" accept comment "tailnet: exit node and LAN access"
+    iifname "podman*" accept comment "container egress"
+  '';
+
   networking.useDHCP = false;
 
   services.resolved.settings.Resolve = {
