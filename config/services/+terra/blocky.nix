@@ -63,13 +63,10 @@
         downloadCooldown = "30s";
         startStrategy = "fast";
         refreshPeriod = "72h";
-        clientGroupsBlock.default = [ "block" ];
-        blackLists.block = [
-          "https://blocklistproject.github.io/Lists/ads.txt"
-          "https://blocklistproject.github.io/Lists/crypto.txt"
-          "https://blocklistproject.github.io/Lists/malware.txt"
-          "https://blocklistproject.github.io/Lists/phishing.txt"
-          "https://blocklistproject.github.io/Lists/tracking.txt"
+        clientGroupsBlock.default = [ "hagezi" ];
+        blackLists.hagezi = [
+          "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.txt"
+          "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/tif.txt"
         ];
       };
     };
