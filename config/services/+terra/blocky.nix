@@ -59,12 +59,16 @@
       };
 
       blocking = {
-        downloadAttempts = 10;
-        downloadCooldown = "30s";
-        startStrategy = "fast";
-        refreshPeriod = "72h";
+        loading = {
+          strategy = "fast";
+          refreshPeriod = "72h";
+          downloads = {
+            attempts = 10;
+            cooldown = "30s";
+          };
+        };
         clientGroupsBlock.default = [ "hagezi" ];
-        blackLists.hagezi = [
+        denylists.hagezi = [
           "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.txt"
           "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/tif.txt"
         ];
