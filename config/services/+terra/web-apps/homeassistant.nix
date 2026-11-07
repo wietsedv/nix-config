@@ -5,18 +5,8 @@
     enable = true;
     package = pkgs.home-assistant; # default package manually disables install check
     config = {
-      # proxy
-      http = {
-        use_x_forwarded_for = true;
-        trusted_proxies = [ "127.0.0.1" ];
-      };
-
       # core
       automation = "!include automations.yaml";
-      # config = { };
-      # frontend = {
-      #   extra_module_url = [ "/var/lib/hass/www/community/lovelace-card-mod/card-mod.js" ];
-      # };
       scene = "!include scenes.yaml";
       script = "!include scripts.yaml";
 
